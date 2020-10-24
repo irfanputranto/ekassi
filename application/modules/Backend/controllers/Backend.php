@@ -24,7 +24,9 @@ class Backend extends BackendController
      * An array of variables to be passed through to the
      * view, layout,....
      */
-    protected $data = array();
+    protected $data = array(
+        'title' => 'ini judul woy'
+    );
 
     /**
      * [__construct description]
@@ -47,7 +49,7 @@ class Backend extends BackendController
     public function index()
     {
         // Example
-        // echo 'backend';
+        // $this->render_page('test', $this->data);
         // $this->load->view('coba');
     }
 }

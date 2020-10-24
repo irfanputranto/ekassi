@@ -40,15 +40,15 @@ class BackendController extends MY_Controller
 
         // This function returns the main CodeIgniter object.
         // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
-        $CI =& get_instance();
+        $CI = &get_instance();
 
         //Example data
         // Site name
-        $this->data['sitename'] = 'CodeIgniter-HMVC';
+        // $this->data['sitename'] = 'CodeIgniter-HMVC';
 
         //Example data
         // Browser tab
-        $this->data['site_title'] = ucfirst('Admin Dashboard');
+        // $this->data['site_title'] = ucfirst('Admin Dashboard');
     }
 
     /**
@@ -63,11 +63,11 @@ class BackendController extends MY_Controller
      */
     protected function render_page($view, $data)
     {
-        $this->load->view('templates/header', $this->data);
-        $this->load->view('templates/main_header', $this->data);
-        $this->load->view('templates/main_sidebar', $this->data);
+        // $this->load->view('templates/header', $this->data);
+        // $this->load->view('templates/main_header', $this->data);
+        // $this->load->view('templates/main_sidebar', $this->data);
         $this->load->view($view, $this->data);
-        $this->load->view('templates/footer', $this->data);
-        $this->load->view('templates/control_sidebar', $this->data);
+        // $this->load->view('templates/footer', $this->data);
+        // $this->load->view('templates/main_js', $this->data);
     }
 }
