@@ -51,5 +51,6 @@ class Backend extends BackendController
         // Example
         // $this->render_page('test', $this->data);
         // $this->load->view('coba');
+        $this->load->view('dashboard/Index');
     }
 }
