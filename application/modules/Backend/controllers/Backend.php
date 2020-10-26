@@ -25,7 +25,7 @@ class Backend extends BackendController
      * view, layout,....
      */
     protected $data = array(
-        'title' => 'ini judul woy'
+        'title' => 'E-kas | Dashboard'
     );
 
     /**
@@ -49,8 +49,7 @@ class Backend extends BackendController
     public function index()
     {
         // Example
-        // $this->render_page('test', $this->data);
-        // $this->load->view('coba');
-        $this->load->view('dashboard/Index');
+        $this->render_page('dashboard/Index', $this->data);
+        // $this->load->view('dashboard/Index');
     }
 }

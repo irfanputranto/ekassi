@@ -36,7 +36,7 @@ class BackendController extends MY_Controller
         parent::__construct();
 
         // CI profiler
-        $this->output->enable_profiler(true);
+        // $this->output->enable_profiler(true);
 
         // This function returns the main CodeIgniter object.
         // Normally, to call any of the available CodeIgniter object or pre defined library classes then you need to declare.
@@ -63,11 +63,11 @@ class BackendController extends MY_Controller
      */
     protected function render_page($view, $data)
     {
-        // $this->load->view('templates/header', $this->data);
-        // $this->load->view('templates/main_header', $this->data);
-        // $this->load->view('templates/main_sidebar', $this->data);
+        $this->load->view('Backend/templates/header', $this->data);
+        $this->load->view('Backend/templates/main_sidebar', $this->data);
+        $this->load->view('Backend/templates/main_header', $this->data);
         $this->load->view($view, $this->data);
-        // $this->load->view('templates/footer', $this->data);
-        // $this->load->view('templates/main_js', $this->data);
+        $this->load->view('Backend/templates/footer', $this->data);
+        $this->load->view('Backend/templates/main_js', $this->data);
     }
 }
