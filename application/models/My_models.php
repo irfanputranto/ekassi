@@ -3,7 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class My_models extends CI_Model
 {
-    public function get_data($select = [], $table = [], $where = [], $join = [])
+    public function get_data($select = null, $table = null, $where = null, $join = null)
     {
         if ($select != null) {
             # code...
@@ -115,5 +115,22 @@ class My_models extends CI_Model
     public function delete($table = null, $where = [])
     {
         $this->db->delete($table, $where);
+    }
+
+    public function file($filename)
+    {
+        $config['upload_path']          = './assets/frontend/images';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $config['max_size']             = 10024;
+        $config['file_name']            = date('dmY-') . round(microtime(true));
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload($filename)) {
+            $error = array('error' => $this->upload->display_errors());
+            $pict = base_url() . "assets/frontend/images/default.png";
+        } else {
+            $pict = base_url() . 'assets/frontend/images/' . $this->upload->data('file_name');
+        }
+        return $pict;
     }
 }

@@ -24,6 +24,7 @@ class Regis extends BackendController
      * An array of variables to be passed through to the
      * view, layout,....
      */
+
     protected $data = array(
         'title' => 'E-kas | Akun',
         'subtitel' => 'Akun'
@@ -74,7 +75,7 @@ class Regis extends BackendController
             $row[] = $no;
             $row[] = $field['nama_akun'];
             $row[] = $field['username'];
-            $row[] = $field['image_akun'];
+            $row[] = '<img src="' . $field['image_akun'] . '" height="50px">';
             $row[] = $field['level'];
             $row[] = '<a><i class="fa fa-edit blue"></i></a> | <a><i class="fa fa-trash-o red"></i></a>';
             $data[] = $row;
@@ -90,16 +91,39 @@ class Regis extends BackendController
         echo json_encode($output);
     }
 
+    public function level()
+    {
+        $level = $this->models->get_data(null, 'tb_level')->result_array();
+        foreach ($level as $data) {
+            $row = [];
+            $row[] = '<option value="' . $data['id_level'] . '">' . $data['level'] . '</option>';
+            $select[] = $row;
+        }
+        for ($i = 0; $i < count($select); $i++) {
+            # code...
+            $select1 = [];
+            $select1 = $select[$i][0];
+            $outselect[] = $select1;
+        }
+        $json = [
+            'dataselcet' => '<option value="">--Pilih--</option>' . implode($outselect)
+        ];
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
+    }
+
     public function insert()
     {
         $json = [];
-        $namapengguna = htmlspecialchars($this->input->post('namalengkap'));
+        $nama_akun = htmlspecialchars($this->input->post('nama_akun'));
         $username = htmlspecialchars($this->input->post('username'));
         $password = htmlspecialchars($this->input->post('password'));
         $password2 = htmlspecialchars($this->input->post('password2'));
         $idlevel = htmlspecialchars($this->input->post('idlevel'));
+        $foto = $this->models->file('foto');
 
-        $this->form_validation->set_rules('namalengkap', 'Nama Lengkap', 'required', [
+        $this->form_validation->set_rules('nama_akun', 'Nama Lengkap', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
         $this->form_validation->set_rules('username', 'Username', 'required', [
@@ -124,7 +148,8 @@ class Regis extends BackendController
         if ($this->form_validation->run() == FALSE) {
             # code...
             $json = [
-                'namalengkap' => form_error('namalengkap'),
+                'status'     => '0',
+                'nama_akun' => form_error('nama_akun'),
                 'username' => form_error('username'),
                 'password' => form_error('password'),
                 'password2' => form_error('password2'),
@@ -133,10 +158,21 @@ class Regis extends BackendController
         } else {
             # code..
             $data = [
-                'nama_akun' => $namapengguna,
-                'username'  => $username,
-                'password'  => password_hash($password2, true),
-                'id_level'  => $idlevel
+                'nama_akun'     => $nama_akun,
+                'username'      => $username,
+                'password'      => password_hash($password2, true),
+                'id_level'      => $idlevel,
+                'image_akun'    => $foto
+            ];
+            $this->models->save('tb_akun', $data);
+            $json = [
+                'status' => '1',
+                'nama_akun',
+                'username',
+                'password',
+                'password2',
+                'idlevel',
+                'foto'
             ];
         }
         $this->output

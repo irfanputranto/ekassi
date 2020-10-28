@@ -67,21 +67,20 @@
              </div>
              <form id="form" class="form-horizontal form-label-left">
                  <div class="modal-body">
-
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="namalengkap">Nama Lengkap <span class="required">*</span>
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Lengkap
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 input-namalengkap" name="namalengkap" placeholder="Nama Pengguna" type="text" autocomplete="off">
+                             <input class="form-control col-md-7 col-xs-12 input-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Pengguna" type="text" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="text" id="username" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12 input-username" autocomplete="off">
+                             <input type="text" id="username" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12 input-username clear-username" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
@@ -90,33 +89,31 @@
                      <div class="item form-group">
                          <label for="password" class="control-label col-md-3">Kata Sandi</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12 input-password" autocomplete="off">
+                             <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12 input-password clear-password" autocomplete="off" placeholder="Kata Sandi">
                              <span class="help-block"></span>
                          </div>
                      </div>
                      <div class="item form-group">
-                         <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Repeat Password</label>
+                         <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Ulang Kata Sandi</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12 input-password2" autocomplete="off">
+                             <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12 input-password2 clear-password2" autocomplete="off" placeholder="Ulang Kata Sandi">
                              <span class="help-block"></span>
                          </div>
                      </div>
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idlevel">Level <span class="required">*</span>
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idlevel">Level
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="idlevel" id="idlevel" class="form-control col-md-7 col-xs-12 input-idlevel">
-                                 <option value="">--PILIH--</option>
-                                 <option value="1">SUPERADMIN</option>
+                             <select name="idlevel" id="idlevel" class="form-control col-md-7 col-xs-12 input-idlevel clear-idlevel dataselect" data-link="<?= base_url('Regis/level') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto <span class="required">*</span>
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="file" id="foto" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12">
+                             <input type="file" id="foto" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
                              <span class="help-block"></span>
                          </div>
                      </div>
