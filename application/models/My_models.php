@@ -100,4 +100,20 @@ class My_models extends CI_Model
         $this->db->from($table);
         return $this->db->count_all_results();
     }
+
+    public function save($table = null, $data = [])
+    {
+        $this->db->insert($table, $data);
+    }
+
+    public function edit($table = null, $data = [], $where = [])
+    {
+        $this->db->where($where);
+        $this->db->update($table = null, $data);
+    }
+
+    public function delete($table = null, $where = [])
+    {
+        $this->db->delete($table, $where);
+    }
 }

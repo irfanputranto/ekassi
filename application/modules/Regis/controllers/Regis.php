@@ -92,8 +92,7 @@ class Regis extends BackendController
 
     public function insert()
     {
-        $data = array('success' => false, 'messages' => array());
-
+        $json = [];
         $namapengguna = htmlspecialchars($this->input->post('namalengkap'));
         $username = htmlspecialchars($this->input->post('username'));
         $password = htmlspecialchars($this->input->post('password'));
@@ -117,18 +116,31 @@ class Regis extends BackendController
             'matches'  => '%s Tidak Sama',
             'min_length' => '%s Minimal panjang karakter 3'
         ]);
+        $this->form_validation->set_rules('idlevel', 'Level', 'required', [
+            'required' => '%s Tidak Boleh Kosong'
+        ]);
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
 
-        if ($this->form_validation->run()) {
+        if ($this->form_validation->run() == FALSE) {
             # code...
-            $data['success'] = true;
+            $json = [
+                'namalengkap' => form_error('namalengkap'),
+                'username' => form_error('username'),
+                'password' => form_error('password'),
+                'password2' => form_error('password2'),
+                'idlevel' => form_error('idlevel')
+            ];
         } else {
             # code..
-            foreach ($_POST as $key => $value) {
-                # code...
-                $data['messages'][$key] = form_error($value);
-            }
+            $data = [
+                'nama_akun' => $namapengguna,
+                'username'  => $username,
+                'password'  => password_hash($password2, true),
+                'id_level'  => $idlevel
+            ];
         }
-        // echo json_encode($data);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
     }
 }

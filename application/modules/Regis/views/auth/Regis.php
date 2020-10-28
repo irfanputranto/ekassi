@@ -65,14 +65,14 @@
                  </button>
                  <h4 class="modal-title"><i class="fa fa-plus blue"></i> Tambah Data</h4>
              </div>
-             <form class="form-horizontal form-label-left">
+             <form id="form" class="form-horizontal form-label-left">
                  <div class="modal-body">
 
                      <div class="item form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="namalengkap">Nama Lengkap <span class="required">*</span>
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="namalengkap" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="namalengkap" placeholder="Nama Pengguna" type="text" autocomplete="off">
+                             <input class="form-control col-md-7 col-xs-12 input-namalengkap" name="namalengkap" placeholder="Nama Pengguna" type="text" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
@@ -81,7 +81,7 @@
                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username <span class="required">*</span>
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="text" id="username" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12" autocomplete="off">
+                             <input type="text" id="username" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12 input-username" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
@@ -90,14 +90,14 @@
                      <div class="item form-group">
                          <label for="password" class="control-label col-md-3">Kata Sandi</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" autocomplete="off">
+                             <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12 input-password" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
                      <div class="item form-group">
                          <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Repeat Password</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12" autocomplete="off">
+                             <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12 input-password2" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
@@ -105,7 +105,7 @@
                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idlevel">Level <span class="required">*</span>
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="idlevel" id="idlevel" class="form-control col-md-7 col-xs-12">
+                             <select name="idlevel" id="idlevel" class="form-control col-md-7 col-xs-12 input-idlevel">
                                  <option value="">--PILIH--</option>
                                  <option value="1">SUPERADMIN</option>
                              </select>
