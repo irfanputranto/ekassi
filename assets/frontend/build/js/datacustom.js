@@ -1,10 +1,10 @@
 $(document).ready(function () {
   $('#error').html(" ");
-  $('input').change(function () {
+  $('input').keypress(function () {
     $(this).removeClass('is-invalid').addClass('is-valid');
     $(this).parents('.form-group').find('.help-block').html(" ");
   });
-  $('textarea').change(function () {
+  $('textarea').keypress(function () {
     $(this).removeClass('is-invalid').addClass('is-valid');
     $(this).parents('.form-group').find('.help-block').html(" ");
   });
