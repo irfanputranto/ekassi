@@ -28,8 +28,11 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li>
-                                    <a href="#" class="active"><i class="fa fa-home"></i> Dashboard</a>
+                                <li <?php if ($this->uri->segment(1) == 'dashboard') {
+                                        # code...
+                                        echo 'class="active"';
+                                    } ?>>
+                                    <a href="<?= base_url('dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Akuntansi <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">

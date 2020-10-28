@@ -51,8 +51,12 @@
 <script src="<?= base_url() ?>assets/frontend/vendors/jszip/dist/jszip.min.js"></script>
 <script src="<?= base_url() ?>assets/frontend/vendors/pdfmake/build/pdfmake.min.js"></script>
 <script src="<?= base_url() ?>assets/frontend/vendors/pdfmake/build/vfs_fonts.js"></script>
+<!-- validator -->
+<script src="<?= base_url() ?>assets/frontend/vendors/validator/validator.js"></script>
+
 <!-- Custom Theme Scripts -->
 <script src="<?= base_url() ?>assets/frontend/build/js/custom.min.js"></script>
+<script src="<?= base_url() ?>assets/frontend/build/js/datacustom.js"></script>
 
 </body>
 

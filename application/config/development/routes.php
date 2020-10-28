@@ -53,6 +53,10 @@ $route['default_controller'] = 'Backend';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['dashboard'] = 'Backend';
 
+
+// Akun Link
 $route['Akun'] = 'Regis';
 $route['Akun/data'] = 'Regis/get_data';
+$route['Akun/tambah'] = 'Regis/insert';

@@ -89,4 +89,46 @@ class Regis extends BackendController
 
         echo json_encode($output);
     }
+
+    public function insert()
+    {
+        $data = array('success' => false, 'messages' => array());
+
+        $namapengguna = htmlspecialchars($this->input->post('namalengkap'));
+        $username = htmlspecialchars($this->input->post('username'));
+        $password = htmlspecialchars($this->input->post('password'));
+        $password2 = htmlspecialchars($this->input->post('password2'));
+        $idlevel = htmlspecialchars($this->input->post('idlevel'));
+
+        $this->form_validation->set_rules('namalengkap', 'Nama Lengkap', 'required', [
+            'required' => '%s Tidak Boleh Kosong'
+        ]);
+        $this->form_validation->set_rules('username', 'Username', 'required', [
+            'required' => '%s Tidak Boleh Kosong'
+        ]);
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+            'required' => '%s Tidak Boleh Kosong',
+            'matches'  => '%s Tidak Sama',
+            'min_length' => '%s Minimal panjang karakter 3'
+        ]);
+
+        $this->form_validation->set_rules('password2', 'Ulang Password', 'required|trim|min_length[3]|matches[password]', [
+            'required' => '%s Tidak Boleh Kosong',
+            'matches'  => '%s Tidak Sama',
+            'min_length' => '%s Minimal panjang karakter 3'
+        ]);
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+        if ($this->form_validation->run()) {
+            # code...
+            $data['success'] = true;
+        } else {
+            # code..
+            foreach ($_POST as $key => $value) {
+                # code...
+                $data['messages'][$key] = form_error($value);
+            }
+        }
+        // echo json_encode($data);
+    }
 }
