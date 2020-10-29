@@ -151,8 +151,9 @@ $(document).on('click', '.ubah', function () {
     dataType: 'json',
     success: function (data) {
       $.each(data, function (keyfield, keyvalue) {
-        console.log(keyfield);
-        // $('.clear-' + keyvalue).val('');
+        // console.log(keyfield);
+        // console.log(keyvalue);
+        $('.edtinput-' + keyfield).val(keyvalue);
       })
     }
   })

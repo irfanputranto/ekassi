@@ -185,14 +185,14 @@
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                              <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
-                             <input type="text" name="edtfoto">
+                             <input type="text" name="edtfoto" class="edtinput-foto clear-foto">
                              <span class="help-block"></span>
                          </div>
                      </div>
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('Akun/tambah'); ?>">Simpan</button>
+                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('Akun/tambah'); ?>">Simpan</button>
                  </div>
              </form>
          </div>

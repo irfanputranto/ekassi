@@ -187,22 +187,22 @@ class Regis extends BackendController
         $where = [
             'id_akun' => $id
         ];
-        $data = $this->models->get_data(null, 'tb_akun', $where)->result_array();
+        $value = $this->models->get_data(null, 'tb_akun', $where)->row_array();
 
-        foreach ($data as $key => $value) {
-            # code...
-            $row = [];
-            $row[] = $value['nama_akun'];
-            $row[] = $value['username'];
-            $row[] = $value['password'];
-            $row[] = $value['id_level'];
-            $row[] = $value['image_akun'];
-            $output[] = $row;
-        }
+
+        $row = [];
+        $row[] = $value['nama_akun'];
+        $row[] = $value['username'];
+        $row[] = $value['password'];
+        $row[] = $value['id_level'];
+        $row[] = $value['image_akun'];
 
         $json = [
-            'data'   => $output,
-            'status' => '1'
+            'status'        => '1',
+            'nama_akun'     => $value['nama_akun'],
+            'username'      => $value['username'],
+            'idlevel'       => $value['id_level'],
+            'foto'          =>  $value['image_akun']
         ];
         $this->output
             ->set_content_type('application/json')
