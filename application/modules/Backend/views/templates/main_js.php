@@ -54,6 +54,9 @@
 <!-- validator -->
 <script src="<?= base_url() ?>assets/frontend/vendors/validator/validator.js"></script>
 
+<!-- sweetalert2 -->
+<script src="<?= base_url() ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+
 <!-- Custom Theme Scripts -->
 <script src="<?= base_url() ?>assets/frontend/build/js/custom.min.js"></script>
 <script src="<?= base_url() ?>assets/frontend/build/js/datacustom.js"></script>

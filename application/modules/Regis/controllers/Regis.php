@@ -75,9 +75,9 @@ class Regis extends BackendController
             $row[] = $no;
             $row[] = $field['nama_akun'];
             $row[] = $field['username'];
-            $row[] = '<img src="' . $field['image_akun'] . '" height="50px">';
+            $row[] = '<img src="' . base_url() . $field['image_akun'] . '" height="50px">';
             $row[] = $field['level'];
-            $row[] = '<a><i class="fa fa-edit blue"></i></a> | <a><i class="fa fa-trash-o red"></i></a>';
+            $row[] = '<a class="ubah" data-link="' . base_url('Akun/ubah/') . $field['id_akun'] . '"><i class="fa fa-edit blue"></i></a> | <a class="delete" data-link="' . base_url('Akun/hapus/') . $field['id_akun'] . '"><i class="fa fa-trash-o red"></i></a>';
             $data[] = $row;
         }
 
@@ -126,8 +126,9 @@ class Regis extends BackendController
         $this->form_validation->set_rules('nama_akun', 'Nama Lengkap', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
-        $this->form_validation->set_rules('username', 'Username', 'required', [
-            'required' => '%s Tidak Boleh Kosong'
+        $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_akun.username]', [
+            'required' => '%s Tidak Boleh Kosong',
+            'is_unique' => '%s Tidak Boleh Sama'
         ]);
         $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]|matches[password2]', [
             'required' => '%s Tidak Boleh Kosong',
@@ -175,6 +176,59 @@ class Regis extends BackendController
                 'foto'
             ];
         }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
+    }
+
+    public function put($id = null)
+    {
+        $json = [];
+        $where = [
+            'id_akun' => $id
+        ];
+        $data = $this->models->get_data(null, 'tb_akun', $where)->result_array();
+
+        foreach ($data as $key => $value) {
+            # code...
+            $row = [];
+            $row[] = $value['nama_akun'];
+            $row[] = $value['username'];
+            $row[] = $value['password'];
+            $row[] = $value['id_level'];
+            $row[] = $value['image_akun'];
+            $output[] = $row;
+        }
+
+        $json = [
+            'data'   => $output,
+            'status' => '1'
+        ];
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
+    }
+
+    public function destroy($id = null)
+    {
+        $json = [];
+
+        if (empty($id)) {
+            # code...
+            $json  = [
+                'status' => '0'
+            ];
+        } else {
+            # code...
+            $where = [
+                'id_akun' => $id
+            ];
+            $this->models->delete('tb_akun', $where);
+            $json  = [
+                'status' => '1'
+            ];
+        }
+
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($json));

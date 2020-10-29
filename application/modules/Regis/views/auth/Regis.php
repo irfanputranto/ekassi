@@ -126,3 +126,75 @@
          </div>
      </div>
  </div>
+
+
+ <div class="modal fade updatemodal" tabindex="-1" role="dialog" aria-hidden="true">
+     <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                 </button>
+                 <h4 class="modal-title"><i class="fa fa-edit blue"></i> Update Data</h4>
+             </div>
+             <form class="form-horizontal form-label-left">
+                 <div class="modal-body">
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Lengkap
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Pengguna" type="text" autocomplete="off">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input type="text" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12 edtinput-username clear-username" autocomplete="off">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+
+
+                     <div class="item form-group">
+                         <label for="password" class="control-label col-md-3">Kata Sandi</label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12 edtinput-password clear-password" autocomplete="off" placeholder="Kata Sandi">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+                     <div class="item form-group">
+                         <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Ulang Kata Sandi</label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input type="password" name="password2" class="form-control col-md-7 col-xs-12 edtinput-password2 clear-password2" autocomplete="off" placeholder="Ulang Kata Sandi">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idlevel">Level
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <select name="idlevel" class="form-control col-md-7 col-xs-12 edtinput-idlevel clear-idlevel dataselect" data-link="<?= base_url('Regis/level') ?>">
+                             </select>
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
+                             <input type="text" name="edtfoto">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
+                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('Akun/tambah'); ?>">Simpan</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>

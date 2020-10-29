@@ -25,6 +25,8 @@
     <link href="<?= base_url() ?>assets/frontend/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
     <!-- bootstrap-daterangepicker -->
     <link href="<?= base_url() ?>assets/frontend/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- swetalert2 -->
+    <link href="<?= base_url() ?>node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url() ?>assets/frontend/build/css/custom.min.css" rel="stylesheet">

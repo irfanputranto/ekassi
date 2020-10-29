@@ -127,9 +127,9 @@ class My_models extends CI_Model
 
         if (!$this->upload->do_upload($filename)) {
             $error = array('error' => $this->upload->display_errors());
-            $pict = base_url() . "assets/frontend/images/default.png";
+            $pict = "assets/frontend/images/default.png";
         } else {
-            $pict = base_url() . 'assets/frontend/images/' . $this->upload->data('file_name');
+            $pict = 'assets/frontend/images/' . $this->upload->data('file_name');
         }
         return $pict;
     }
