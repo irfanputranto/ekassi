@@ -109,7 +109,7 @@ class My_models extends CI_Model
     public function edit($table = null, $data = [], $where = [])
     {
         $this->db->where($where);
-        $this->db->update($table = null, $data);
+        $this->db->update($table, $data);
     }
 
     public function delete($table = null, $where = [])
@@ -128,6 +128,23 @@ class My_models extends CI_Model
         if (!$this->upload->do_upload($filename)) {
             $error = array('error' => $this->upload->display_errors());
             $pict = "assets/frontend/images/default.png";
+        } else {
+            $pict = 'assets/frontend/images/' . $this->upload->data('file_name');
+        }
+        return $pict;
+    }
+
+    public function fileedt($filename = null, $file = null)
+    {
+        $config['upload_path']          = './assets/frontend/images';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $config['max_size']             = 10024;
+        $config['file_name']            = date('dmY-') . round(microtime(true));
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload($filename)) {
+            $error = array('error' => $this->upload->display_errors());
+            $pict = $file;
         } else {
             $pict = 'assets/frontend/images/' . $this->upload->data('file_name');
         }

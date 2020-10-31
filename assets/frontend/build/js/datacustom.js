@@ -151,10 +151,66 @@ $(document).on('click', '.ubah', function () {
     dataType: 'json',
     success: function (data) {
       $.each(data, function (keyfield, keyvalue) {
-        // console.log(keyfield);
-        // console.log(keyvalue);
         $('.edtinput-' + keyfield).val(keyvalue);
       })
     }
+  })
+})
+
+$(document).on('click', '.edtsimpan', function (e) {
+  e.preventDefault();
+  var dataform = new FormData(this.form);
+  var action = $(this).attr('data-link');
+  $.ajax({
+    contentType: false,
+    processData: false,
+    cache: false,
+    url: action,
+    type: 'POST',
+    data: dataform,
+    dataType: 'json',
+    beforeSend: function () {
+      $('.edtsimpan').text('loading...');
+      $('.edtsimpan').attr('disabled', true);
+      $('.tutup').attr('disabled', true);
+    },
+    success: function (data) {
+      table.ajax.reload(function (json) {
+        json.response;
+      });
+      $('.edtsimpan').text('Simpan');
+      $('.edtsimpan').attr('disabled', false);
+      $('.tutup').attr('disabled', false);
+      if (data.status == 0) {
+        $.each(data, function (key, value) {
+          $('.edtinput-' + key).addClass('is-invalid');
+          $('.edtinput-' + key).parents('.form-group').find('.help-block').html(value);
+        })
+      } else {
+        $('.updatemodal').modal('hide');
+        $.each(data, function (keyfield, keyvalue) {
+          $('.clear-' + keyvalue).val('');
+        })
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Berhasil disimpan',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }
+    },
+    error: function (xhr) { // if error occured
+      $('.edtsimpan').text('Simpan');
+      $('.edtsimpan').attr('disabled', false);
+      $('.tutup').attr('disabled', false);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Koneksi bermasalah!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    },
   })
 })

@@ -61,4 +61,5 @@ $route['Akun'] = 'Regis';
 $route['Akun/data'] = 'Regis/get_data';
 $route['Akun/tambah'] = 'Regis/insert';
 $route['Akun/ubah/(:any)'] = 'Regis/put/$1';
+$route['Akun/put'] = 'Regis/update';
 $route['Akun/hapus/(:any)'] = 'Regis/destroy/$1';

@@ -138,11 +138,14 @@
              </div>
              <form class="form-horizontal form-label-left">
                  <div class="modal-body">
+
                      <div class="item form-group">
                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Lengkap
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                              <input class="form-control col-md-7 col-xs-12 edtinput-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Pengguna" type="text" autocomplete="off">
+                             <span class="help-block"></span>
+                             <input type="hidden" name="id_akun" class="edtinput-id_akun clear-id_akun">
                              <span class="help-block"></span>
                          </div>
                      </div>
@@ -155,13 +158,13 @@
                              <span class="help-block"></span>
                          </div>
                      </div>
-
-
                      <div class="item form-group">
                          <label for="password" class="control-label col-md-3">Kata Sandi</label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12 edtinput-password clear-password" autocomplete="off" placeholder="Kata Sandi">
+                             <input type="password" name="password" class="form-control col-md-7 col-xs-12 edtinput-password clear-password" autocomplete="off" placeholder="Kata Sandi">
                              <span class="help-block"></span>
+                             <span class="text-danger">*Kosongkan Password Jika Tidak Ingin Mengubah</span>
+                             <input type="hidden" name="old_password" class="edtinput-passwordold clear-passwordold">
                          </div>
                      </div>
                      <div class="item form-group">
@@ -185,14 +188,16 @@
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                              <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
-                             <input type="text" name="edtfoto" class="edtinput-foto clear-foto">
+                             <input type="hidden" name="edtfoto" class="edtinput-foto clear-foto">
                              <span class="help-block"></span>
+                             <span class="text-danger">*Jika tidak ingin mengubah foto biarkan saja</span>
+                             <input type="hidden" name="fileedt" class="edtinput-fileedt clear-fileedt">
                          </div>
                      </div>
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('Akun/tambah'); ?>">Simpan</button>
+                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('Akun/put'); ?>">Simpan</button>
                  </div>
              </form>
          </div>

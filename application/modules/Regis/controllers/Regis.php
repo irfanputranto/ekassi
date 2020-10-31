@@ -189,21 +189,107 @@ class Regis extends BackendController
         ];
         $value = $this->models->get_data(null, 'tb_akun', $where)->row_array();
 
-
-        $row = [];
-        $row[] = $value['nama_akun'];
-        $row[] = $value['username'];
-        $row[] = $value['password'];
-        $row[] = $value['id_level'];
-        $row[] = $value['image_akun'];
-
         $json = [
             'status'        => '1',
+            'id_akun'       => $value['id_akun'],
             'nama_akun'     => $value['nama_akun'],
             'username'      => $value['username'],
+            'passwordold'   => $value['password'],
             'idlevel'       => $value['id_level'],
-            'foto'          =>  $value['image_akun']
+            'fileedt'       => $value['image_akun']
         ];
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
+    }
+
+    public function update()
+    {
+        $json = [];
+        $id_akun = htmlspecialchars($this->input->post('id_akun'));
+        $nama_akun = htmlspecialchars($this->input->post('nama_akun'));
+        $username = htmlspecialchars($this->input->post('username'));
+        $password = htmlspecialchars($this->input->post('password'));
+        $password2 = htmlspecialchars($this->input->post('password2'));
+        $idlevel = htmlspecialchars($this->input->post('idlevel'));
+        $edtfile = htmlspecialchars($this->input->post('fileedt'));
+        $foto = $this->models->fileedt('foto', $edtfile);
+        $passwordold = htmlspecialchars($this->input->post('old_password'));
+
+        $where = [
+            'id_akun' => $id_akun
+        ];
+        $cekusername = $this->models->get_data(null, 'tb_akun', $where)->row_array();
+
+        $this->form_validation->set_rules('id_akun', 'Id Akun', 'required', [
+            'required' => '0'
+        ]);
+        $this->form_validation->set_rules('nama_akun', 'Nama Lengkap', 'required', [
+            'required' => '%s Tidak Boleh Kosong'
+        ]);
+
+        if ($cekusername != $username) {
+        } else {
+            # code...
+            $this->form_validation->set_rules('username', 'Username', 'required|is_unique[tb_akun.username]', [
+                'required' => '%s Tidak Boleh Kosong',
+                'is_unique' => '%s Tidak Boleh Sama'
+            ]);
+        }
+
+        if (!$passwordold) {
+            $this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+                'required' => '%s Tidak Boleh Kosong',
+                'matches'  => '%s Tidak Sama',
+                'min_length' => '%s Minimal panjang karakter 3'
+            ]);
+
+            $this->form_validation->set_rules('password2', 'Ulang Password', 'required|trim|min_length[3]|matches[password]', [
+                'required' => '%s Tidak Boleh Kosong',
+                'matches'  => '%s Tidak Sama',
+                'min_length' => '%s Minimal panjang karakter 3'
+            ]);
+        }
+
+        $this->form_validation->set_rules('idlevel', 'Level', 'required', [
+            'required' => '%s Tidak Boleh Kosong'
+        ]);
+        $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
+
+        if ($this->form_validation->run() == FALSE) {
+            # code...
+            $json = [
+                'status'     => '0',
+                'nama_akun'  => form_error('nama_akun'),
+                'username'   => form_error('username'),
+                'password'   => form_error('password'),
+                'password2'  => form_error('password2'),
+                'idlevel'    => form_error('idlevel')
+            ];
+        } else {
+            # code..
+            $data = [
+                'nama_akun'     => $nama_akun,
+                'username'      => $username,
+                'password'      => password_hash($password2, true),
+                'id_level'      => $idlevel,
+                'image_akun'    => $foto
+            ];
+            $where = [
+                'id_akun' => $id_akun
+            ];
+            $this->models->edit('tb_akun', $data, $where);
+            $json = [
+                'status' => '1',
+                'id_akun',
+                'nama_akun',
+                'username',
+                'password',
+                'password2',
+                'idlevel',
+                'foto'
+            ];
+        }
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($json));
