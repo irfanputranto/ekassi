@@ -33,14 +33,14 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('akun/data'); ?> cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('anggota/data'); ?> cellspacing="0" width="100%">
                              <thead>
                                  <tr>
                                      <th>No.</th>
-                                     <th>Nama Lengkap</th>
-                                     <th>Username</th>
+                                     <th>Nama Anggota</th>
+                                     <th>Jenis Kelamin</th>
+                                     <th>Jabatan</th>
                                      <th>Foto</th>
-                                     <th>Akses</th>
                                      <th>Aksi</th>
                                  </tr>
                              </thead>
@@ -66,43 +66,29 @@
              <form id="form" class="form-horizontal form-label-left">
                  <div class="modal-body">
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Lengkap
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_anggota">Nama Anggota
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 input-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Pengguna" type="text" autocomplete="off">
+                             <input class="form-control col-md-7 col-xs-12 input-nama_anggota clear-nama_anggota" name="nama_anggota" placeholder="Nama Anggota" type="text" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis Kelamin
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="text" id="username" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12 input-username clear-username" autocomplete="off">
+                             <select name="jenis_kelamin" id="select-0" class="form-control col-md-7 col-xs-12 input-jenis_kelamin clear-jenis_kelamin dataselect" data-link="<?= base_url('Anggota/jenis_kelamin') ?>">
+                             </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
 
-
                      <div class="item form-group">
-                         <label for="password" class="control-label col-md-3">Kata Sandi</label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="password" type="password" name="password" data-validate-length="6,8" class="form-control col-md-7 col-xs-12 input-password clear-password" autocomplete="off" placeholder="Kata Sandi">
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Ulang Kata Sandi</label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input id="password2" type="password" name="password2" data-validate-linked="password" class="form-control col-md-7 col-xs-12 input-password2 clear-password2" autocomplete="off" placeholder="Ulang Kata Sandi">
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idlevel">Level
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="idlevel" id="select-0" class="form-control col-md-7 col-xs-12 input-idlevel clear-idlevel dataselect" data-link="<?= base_url('Regis/level') ?>">
+                             <select name="jabatan" id="select-1" class="form-control col-md-7 col-xs-12 input-jabatan clear-jabatan dataselect" data-link="<?= base_url('Anggota/jabatan') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
@@ -111,14 +97,15 @@
                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="file" id="foto" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
+                             <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
                              <span class="help-block"></span>
                          </div>
                      </div>
+
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('akun/tambah'); ?>">Simpan</button>
+                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('anggota/tambah'); ?>">Simpan</button>
                  </div>
              </form>
          </div>
@@ -136,47 +123,30 @@
              </div>
              <form class="form-horizontal form-label-left">
                  <div class="modal-body">
+                     <input type="hidden" name="id_anggota" class="edtinput-id_anggota clear-id_anggota">
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_anggota">Nama Anggota
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_anggota clear-nama_anggota" name="nama_anggota" placeholder="Nama Anggota" type="text" autocomplete="off">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Lengkap
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis Kelamin
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Pengguna" type="text" autocomplete="off">
-                             <span class="help-block"></span>
-                             <input type="hidden" name="id_akun" class="edtinput-id_akun clear-id_akun">
+                             <select name="jenis_kelamin" id="select-2" class="form-control col-md-7 col-xs-12 edtinput-jenis_kelamin clear-jenis_kelamin dataselect" data-link="<?= base_url('Anggota/jenis_kelamin') ?>">
+                             </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
-
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="username">Username
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="text" name="username" placeholder="Username" class="form-control col-md-7 col-xs-12 edtinput-username clear-username" autocomplete="off">
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label for="password" class="control-label col-md-3">Kata Sandi</label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="password" name="password" class="form-control col-md-7 col-xs-12 edtinput-password clear-password" autocomplete="off" placeholder="Kata Sandi">
-                             <span class="help-block"></span>
-                             <span class="text-danger">*Kosongkan Password Jika Tidak Ingin Mengubah</span>
-                             <input type="hidden" name="old_password" class="edtinput-passwordold clear-passwordold">
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label for="password2" class="control-label col-md-3 col-sm-3 col-xs-12">Ulang Kata Sandi</label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="password" name="password2" class="form-control col-md-7 col-xs-12 edtinput-password2 clear-password2" autocomplete="off" placeholder="Ulang Kata Sandi">
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="idlevel">Level
-                         </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="idlevel" id="select-1" class="form-control col-md-7 col-xs-12 edtinput-idlevel clear-idlevel dataselect" data-link="<?= base_url('Regis/level') ?>">
+                             <select name="jabatan" id="select-3" class="form-control col-md-7 col-xs-12 edtinput-jabatan clear-jabatan dataselect" data-link="<?= base_url('Anggota/jabatan') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
@@ -186,16 +156,15 @@
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
                              <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
-                             <input type="hidden" name="edtfoto" class="edtinput-foto clear-foto">
                              <span class="help-block"></span>
-                             <span class="text-danger">*Jika tidak ingin mengubah foto biarkan saja</span>
                              <input type="hidden" name="fileedt" class="edtinput-fileedt clear-fileedt">
                          </div>
                      </div>
+
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('akun/put'); ?>">Simpan</button>
+                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('anggota/put'); ?>">Simpan</button>
                  </div>
              </form>
          </div>

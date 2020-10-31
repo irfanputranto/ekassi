@@ -57,9 +57,25 @@ $route['dashboard'] = 'Backend';
 
 
 // Akun Link
-$route['Akun'] = 'Regis';
-$route['Akun/data'] = 'Regis/get_data';
-$route['Akun/tambah'] = 'Regis/insert';
-$route['Akun/ubah/(:any)'] = 'Regis/put/$1';
-$route['Akun/put'] = 'Regis/update';
-$route['Akun/hapus/(:any)'] = 'Regis/destroy/$1';
+$route['akun'] = 'Regis';
+$route['akun/data'] = 'Regis/get_data';
+$route['akun/tambah'] = 'Regis/insert';
+$route['akun/ubah/(:any)'] = 'Regis/put/$1';
+$route['akun/put'] = 'Regis/update';
+$route['akun/hapus/(:any)'] = 'Regis/destroy/$1';
+
+// Anggota Link
+$route['anggota'] = 'Anggota';
+$route['anggota/data'] = 'Anggota/get_data';
+$route['anggota/tambah'] = 'Anggota/insert';
+$route['anggota/ubah/(:any)'] = 'Anggota/put/$1';
+$route['anggota/put'] = 'Anggota/update';
+$route['anggota/hapus/(:any)'] = 'Anggota/destroy/$1';
+
+// Jabatan Link
+$route['jabatan'] = 'Jabatan';
+$route['jabatan/data'] = 'Jabatan/get_data';
+$route['jabatan/tambah'] = 'Jabatan/insert';
+$route['jabatan/ubah/(:any)'] = 'Jabatan/put/$1';
+$route['jabatan/put'] = 'Jabatan/update';
+$route['jabatan/hapus/(:any)'] = 'Jabatan/destroy/$1';

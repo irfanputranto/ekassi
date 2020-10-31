@@ -13,27 +13,77 @@ $(document).ready(function () {
     $(this).parents('.form-group').find('.help-block').html(" ");
   });
 
-  $('.menuload .nav a').on('click', function (e) {
-    e.preventDefault();
-    var url = $(this).attr('href');
-    $('.loadpage').load(url);
+  // $('.menuload .nav a').on('click', function (e) {
+  //   e.preventDefault();
+  //   var url = $(this).attr('href');
+  //   $('.loadpage').load(url);
+  //   return false;
+  // });
+
+
+  $('body').on('click', '.animsition-link', function() {
+    var link = $(this).attr('href');
+    // console.log('click '+link);
+    $('.site-menu-item').removeClass('active open');
+
+    $(this).parent().addClass('active open');
+    $.ajax({
+      url: link,
+      type: 'POST',
+      data: {
+        ajax: 'active'
+      },
+      success: function(respond) {
+        // console.log('sukses: '+respond);
+        $('.page').html(respond);
+        var baseclass = $('#datatables').attr('data-class');
+        switch(baseclass){
+          case 'user':
+          call_datatable_user();
+          break;
+          case 'dbdregister':
+          call_datatable_dbdregister();
+          break;
+          default:
+          call_datatable();
+          break;
+        }
+      },
+      error: function(respond) {
+        // console.log('gagal: '+respond);
+      }
+    });
     return false;
   });
-
-
 
 })
 
 $(document).on('ready', function () {
-  var link = $('.dataselect').data('link');
-  $.ajax({
-    url: link,
-    type: 'GET',
-    dataType: 'json',
-    success: function (select) {
-      $('.dataselect').html(select.dataselcet);
+  var aydi = $('.dataselect').attr('id'),
+        hitung = aydi.split('-');
+    for (let a = 0; a < hitung.length; a++) {
+      var link = $('#select-' + a).data('link');
+      $.ajax({
+        url: link,
+        type: 'GET',
+        dataType: 'json',
+        success: function (select) {
+          var no = 1;
+          $.each(select, function(keyselect, valueselect) {
+            $('#select-' + keyselect).html(valueselect);
+          })
+        },
+        error: function (xhr) { // if error occured
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Koneksi bermasalah!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
     }
-  })
 })
 
 $('.simpan').on('click', function (e) {
@@ -117,17 +167,21 @@ $(document).on('click', '.delete', function () {
             json.response;
           });
           if (data.status == 0) {
-            Swal.fire(
-              'Hapus!',
-              'Data Gagal dihapus!',
-              'error'
-            )
+            Swal.fire({
+              position: 'top-end',
+              icon: 'error',
+              title: 'Data Gagal dihapus!',
+              showConfirmButton: false,
+              timer: 1500
+            })
           } else {
-            Swal.fire(
-              'Hapus!',
-              'Data berhasil dihapus!',
-              'success'
-            )
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Data berhasil dihapus!',
+              showConfirmButton: false,
+              timer: 1500
+            })
           }
         },
         error: function (xhr) { // if error occured
@@ -158,6 +212,18 @@ $(document).on('click', '.ubah', function () {
     success: function (data) {
       $.each(data, function (keyfield, keyvalue) {
         $('.edtinput-' + keyfield).val(keyvalue);
+      })
+    },
+    error: function (xhr) { // if error occured
+      table.ajax.reload(function (json) {
+        json.response;
+      });
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Koneksi bermasalah!',
+        showConfirmButton: false,
+        timer: 1500
       })
     }
   })

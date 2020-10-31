@@ -26,8 +26,8 @@ class Regis extends BackendController
      */
 
     protected $data = array(
-        'title' => 'E-kas | Akun',
-        'subtitel' => 'Akun'
+        'title' => 'E-kas | akun',
+        'subtitel' => 'akun'
     );
 
     /**
@@ -77,18 +77,20 @@ class Regis extends BackendController
             $row[] = $field['username'];
             $row[] = '<img src="' . base_url() . $field['image_akun'] . '" height="50px">';
             $row[] = $field['level'];
-            $row[] = '<a class="ubah" data-link="' . base_url('Akun/ubah/') . $field['id_akun'] . '"><i class="fa fa-edit blue"></i></a> | <a class="delete" data-link="' . base_url('Akun/hapus/') . $field['id_akun'] . '"><i class="fa fa-trash-o red"></i></a>';
+            $row[] = '<a class="ubah" data-link="' . base_url('akun/ubah/') . $field['id_akun'] . '"><i class="fa fa-edit blue"></i></a> | <a class="delete" data-link="' . base_url('akun/hapus/') . $field['id_akun'] . '"><i class="fa fa-trash-o red"></i></a>';
             $data[] = $row;
         }
 
-        $output = [
+        $json = [
             "draw" => $_POST['draw'],
             "recordsTotal" => $this->models->count_all($table),
             "recordsFiltered" => $this->models->count_filtered(null, $table, $join, $column_order, $column_search, $order),
             "data" => $data
         ];
 
-        echo json_encode($output);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
     }
 
     public function level()
@@ -106,7 +108,8 @@ class Regis extends BackendController
             $outselect[] = $select1;
         }
         $json = [
-            'dataselcet' => '<option value="">--Pilih--</option>' . implode($outselect)
+            '0' => '<option value="">--Pilih--</option>' . implode($outselect),
+            '1' => '<option value="">--Pilih--</option>' . implode($outselect)
         ];
         $this->output
             ->set_content_type('application/json')
@@ -213,7 +216,7 @@ class Regis extends BackendController
         $password2 = htmlspecialchars($this->input->post('password2'));
         $idlevel = htmlspecialchars($this->input->post('idlevel'));
         $edtfile = htmlspecialchars($this->input->post('fileedt'));
-        $foto = $this->models->fileedt('foto', $edtfile);
+        $foto = $this->models->file('foto', $edtfile);
         $passwordold = htmlspecialchars($this->input->post('old_password'));
 
         $where = [
@@ -221,7 +224,7 @@ class Regis extends BackendController
         ];
         $cekusername = $this->models->get_data(null, 'tb_akun', $where)->row_array();
 
-        $this->form_validation->set_rules('id_akun', 'Id Akun', 'required', [
+        $this->form_validation->set_rules('id_akun', 'Id akun', 'required', [
             'required' => '0'
         ]);
         $this->form_validation->set_rules('nama_akun', 'Nama Lengkap', 'required', [

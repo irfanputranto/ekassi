@@ -43,10 +43,10 @@
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="form.html">Anggota</a></li>
-                                        <li><a href="form_validation.html">Jabatan</a></li>
+                                        <li><a href="<?= base_url('anggota'); ?>">Anggota</a></li>
+                                        <li><a href="<?= base_url('jabatan'); ?>">Jabatan</a></li>
                                         <li><a href="form_validation.html">Akun Akutansi</a></li>
-                                        <li><a href="<?= base_url('Akun') ?>">Akun</a></li>
+                                        <li><a href="<?= base_url('akun') ?>">Akun</a></li>
                                     </ul>
                                 </li>
 

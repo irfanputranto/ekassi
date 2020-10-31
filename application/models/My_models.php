@@ -117,7 +117,7 @@ class My_models extends CI_Model
         $this->db->delete($table, $where);
     }
 
-    public function file($filename)
+    public function file($filename = null, $file = null)
     {
         $config['upload_path']          = './assets/frontend/images';
         $config['allowed_types']        = 'gif|jpg|png|jpeg';
@@ -126,8 +126,14 @@ class My_models extends CI_Model
         $this->load->library('upload', $config);
 
         if (!$this->upload->do_upload($filename)) {
-            $error = array('error' => $this->upload->display_errors());
-            $pict = "assets/frontend/images/default.png";
+            if ($file != null) {
+                # code...
+                $pict = $file;
+            } else {
+                # code...
+                $error = array('error' => $this->upload->display_errors());
+                $pict = "assets/frontend/images/default.png";
+            }
         } else {
             $pict = 'assets/frontend/images/' . $this->upload->data('file_name');
         }
