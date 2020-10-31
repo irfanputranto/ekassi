@@ -1,3 +1,11 @@
+function stopRKey(evt) {
+  var evt = (evt) ? evt : ((event) ? event : null);
+  var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+  if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
+}
+  document.onkeypress = stopRKey;
+
+  
 $(document).ready(function () {
   $('#error').html(" ");
   $('input').keypress(function () {
@@ -19,6 +27,7 @@ $(document).ready(function () {
   //   $('.loadpage').load(url);
   //   return false;
   // });
+
 
 
   $('body').on('click', '.animsition-link', function() {
@@ -99,7 +108,7 @@ $('.simpan').on('click', function (e) {
     data: dataform,
     dataType: 'json',
     beforeSend: function () {
-      $('.simpan').text('loading...');
+      $('.loading').show();
       $('.simpan').attr('disabled', true);
       $('.tutup').attr('disabled', true);
     },
@@ -107,7 +116,7 @@ $('.simpan').on('click', function (e) {
       table.ajax.reload(function (json) {
         json.response;
       });
-      $('.simpan').text('Simpan');
+      $('.loading').hide();
       $('.simpan').attr('disabled', false);
       $('.tutup').attr('disabled', false);
       if (data.status == 0) {
@@ -130,7 +139,7 @@ $('.simpan').on('click', function (e) {
       }
     },
     error: function (xhr) { // if error occured
-      $('.simpan').text('Simpan');
+      $('.loading').hide();
       $('.simpan').attr('disabled', false);
       $('.tutup').attr('disabled', false);
       Swal.fire({
@@ -242,7 +251,7 @@ $(document).on('click', '.edtsimpan', function (e) {
     data: dataform,
     dataType: 'json',
     beforeSend: function () {
-      $('.edtsimpan').text('loading...');
+      $('.loading').show();
       $('.edtsimpan').attr('disabled', true);
       $('.tutup').attr('disabled', true);
     },
@@ -250,7 +259,7 @@ $(document).on('click', '.edtsimpan', function (e) {
       table.ajax.reload(function (json) {
         json.response;
       });
-      $('.edtsimpan').text('Simpan');
+      $('.loading').hide();
       $('.edtsimpan').attr('disabled', false);
       $('.tutup').attr('disabled', false);
       if (data.status == 0) {
@@ -273,7 +282,7 @@ $(document).on('click', '.edtsimpan', function (e) {
       }
     },
     error: function (xhr) { // if error occured
-      $('.edtsimpan').text('Simpan');
+      $('.loading').hide();
       $('.edtsimpan').attr('disabled', false);
       $('.tutup').attr('disabled', false);
       Swal.fire({

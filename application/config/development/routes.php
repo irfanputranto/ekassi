@@ -79,3 +79,11 @@ $route['jabatan/tambah'] = 'Jabatan/insert';
 $route['jabatan/ubah/(:any)'] = 'Jabatan/put/$1';
 $route['jabatan/put'] = 'Jabatan/update';
 $route['jabatan/hapus/(:any)'] = 'Jabatan/destroy/$1';
+
+// Akunkas Link
+$route['kodeakun'] = 'Akunkas';
+$route['kodeakun/data'] = 'Akunkas/get_data';
+$route['kodeakun/tambah'] = 'Akunkas/insert';
+$route['kodeakun/ubah/(:any)'] = 'Akunkas/put/$1';
+$route['kodeakun/put'] = 'Akunkas/update';
+$route['kodeakun/hapus/(:any)'] = 'Akunkas/destroy/$1';

@@ -22,11 +22,12 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('jabatan/data'); ?> cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('kodeakun/data'); ?> cellspacing="0" width="100%">
                              <thead>
                                  <tr>
                                      <th>No.</th>
-                                     <th>Jabatan</th>
+                                     <th>Kode Akun</th>
+                                     <th>Nama Akun</th>
                                      <th>Aksi</th>
                                  </tr>
                              </thead>
@@ -52,17 +53,25 @@
              <form id="form" class="form-horizontal form-label-left">
                  <div class="modal-body">
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_jabatan">Jabatan
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_akun">Kode Akun
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 input-nama_jabatan clear-nama_jabatan" name="nama_jabatan" placeholder="Jabatan" type="text" autocomplete="off">
+                             <input class="form-control col-md-7 col-xs-12 input-kode_akun clear-kode_akun" name="kode_akun" placeholder="Kode Akun" type="text" autocomplete="off">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Akun
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input class="form-control col-md-7 col-xs-12 input-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Akun" type="text" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('jabatan/tambah'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
+                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('kodeakun/tambah'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
                  </div>
              </form>
          </div>
@@ -80,20 +89,27 @@
              </div>
              <form class="form-horizontal form-label-left">
                  <div class="modal-body">
-                     <input type="hidden" name="id_jabatan" class="edtinput-id_jabatan clear-id_jabatan">
+                     <input type="hidden" name="id_data_akun" class="edtinput-id_data_akun clear-id_data_akun">
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_jabatan">Jabatan
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kode_akun">Kode Akun
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_jabatan clear-nama_jabatan" name="nama_jabatan" placeholder="Jabatan" type="text" autocomplete="off">
+                             <input class="form-control col-md-7 col-xs-12 edtinput-kode_akun clear-kode_akun" name="kode_akun" placeholder="Kode Akun" type="text" autocomplete="off">
                              <span class="help-block"></span>
                          </div>
                      </div>
-
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_akun">Nama Akun
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_akun clear-nama_akun" name="nama_akun" placeholder="Nama Akun" type="text" autocomplete="off">
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('jabatan/put'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
+                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('kodeakun/put'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
                  </div>
              </form>
          </div>

@@ -45,7 +45,7 @@
                                     <ul class="nav child_menu">
                                         <li><a href="<?= base_url('anggota'); ?>">Anggota</a></li>
                                         <li><a href="<?= base_url('jabatan'); ?>">Jabatan</a></li>
-                                        <li><a href="form_validation.html">Akun Akutansi</a></li>
+                                        <li><a href="<?= base_url('kodeakun'); ?>">Akun Akutansi</a></li>
                                         <li><a href="<?= base_url('akun') ?>">Akun</a></li>
                                     </ul>
                                 </li>
