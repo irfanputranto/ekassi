@@ -49,7 +49,8 @@ class Backend extends BackendController
     public function index()
     {
         // Example
-        $this->render_page('dashboard/Index', $this->data);
+        $data = $this->render_page('dashboard/Index', $this->data);
+        // echo $data;
         // $this->load->view('dashboard/Index');
     }
 }

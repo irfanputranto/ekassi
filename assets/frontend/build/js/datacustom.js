@@ -13,6 +13,12 @@ $(document).ready(function () {
     $(this).parents('.form-group').find('.help-block').html(" ");
   });
 
+  $('.menuload .nav a').on('click', function (e) {
+    e.preventDefault();
+    var url = $(this).attr('href');
+    $('.loadpage').load(url);
+    return false;
+  });
 
 
 

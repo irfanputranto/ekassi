@@ -1,4 +1,4 @@
-<body class="nav-md">
+<body class="nav-md loadpage">
     <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col">
@@ -25,7 +25,7 @@
 
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-                        <div class="menu_section">
+                        <div class="menu_section menuload">
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li <?php if ($this->uri->segment(1) == 'dashboard') {
@@ -74,8 +74,6 @@
                                 </li> -->
                             </ul>
                         </div>
-
-
                     </div>
                     <!-- /sidebar menu -->
 
