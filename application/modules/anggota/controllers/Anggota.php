@@ -100,16 +100,21 @@ class Anggota extends BackendController
     public function jabatan()
     {
         $jabatan = $this->models->get_data(null, 'tb_jabatan')->result_array();
+        $select = [];
+        $outselect = [];
         foreach ($jabatan as $data) {
             $row = [];
             $row[] = '<option value="' . $data['id_jabatan'] . '">' . $data['nama_jabatan'] . '</option>';
             $select[] = $row;
         }
-        for ($i = 0; $i < count($select); $i++) {
+        if (count($select) != null) {
             # code...
-            $select1 = [];
-            $select1 = $select[$i][0];
-            $outselect[] = $select1;
+            for ($i = 0; $i < count($select); $i++) {
+                # code...
+                $select1 = [];
+                $select1 = $select[$i][0];
+                $outselect[] = $select1;
+            }
         }
         $json = [
             '1' => '<option value="">--Pilih--</option>' . implode($outselect),
