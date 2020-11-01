@@ -23,19 +23,27 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('anggota/data'); ?> cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('keluar/data'); ?> cellspacing="0" width="100%">
                              <thead>
                                  <tr>
                                      <th>No.</th>
-                                     <th>Nama Anggota</th>
-                                     <th>Jenis Kelamin</th>
-                                     <th>Jabatan</th>
-                                     <th>Foto</th>
+                                     <th>Tanggal</th>
+                                     <th>Kode Akun</th>
+                                     <th>Jurnal</th>
+                                     <th>Keterangan</th>
+                                     <th>Total</th>
                                      <th>Aksi</th>
                                  </tr>
                              </thead>
                              <tbody>
                              </tbody>
+                             <!-- <tfoot>
+                                 <tr>
+                                     <th colspan="5"></th>
+                                     <th style="text-align:right">Total:</th>
+                                     <th></th>
+                                 </tr>
+                             </tfoot> -->
                          </table>
                      </div>
                  </div>

@@ -87,3 +87,11 @@ $route['kodeakun/tambah'] = 'Akunkas/insert';
 $route['kodeakun/ubah/(:any)'] = 'Akunkas/put/$1';
 $route['kodeakun/put'] = 'Akunkas/update';
 $route['kodeakun/hapus/(:any)'] = 'Akunkas/destroy/$1';
+
+// Kaskeluar Link
+$route['keluar'] = 'Kaskeluar';
+$route['keluar/data'] = 'Kaskeluar/get_data';
+$route['keluar/tambah'] = 'Kaskeluar/insert';
+$route['keluar/ubah/(:any)'] = 'Kaskeluar/put/$1';
+$route['keluar/put'] = 'Kaskeluar/update';
+$route['keluar/hapus/(:any)'] = 'Kaskeluar/destroy/$1';
