@@ -34,9 +34,9 @@
                                     } ?>>
                                     <a href="<?= base_url('dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a>
                                 </li>
-                                <li><a><i class="fa fa-desktop"></i> Akuntansi <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-desktop"></i> Keuangan <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">Kas Keluar</a></li>
+                                        <li><a href="<?= base_url('kk') ?>">Kas Keluar</a></li>
                                         <li><a href="media_gallery.html">Kas Masuk</a></li>
                                         <li><a href="typography.html">Jurnal</a></li>
                                     </ul>
