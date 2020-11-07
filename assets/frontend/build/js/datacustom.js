@@ -67,33 +67,6 @@ $(document).ready(function () {
 
 })
 
-$(document).on('ready', function () {
-  var aydi = $('.dataselect').attr('id'),
-        hitung = aydi.split('-');
-    for (let a = 0; a < hitung.length; a++) {
-      var link = $('#select-' + a).data('link');
-      $.ajax({
-        url: link,
-        type: 'GET',
-        dataType: 'json',
-        success: function (select) {
-          var no = 1;
-          $.each(select, function(keyselect, valueselect) {
-            $('#select-' + keyselect).html(valueselect);
-          })
-        },
-        error: function (xhr) { // if error occured
-          Swal.fire({
-            position: 'top-end',
-            icon: 'error',
-            title: 'Koneksi bermasalah!',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        }
-      })
-    }
-})
 
 $('.simpan').on('click', function (e) {
   e.preventDefault();
@@ -113,6 +86,7 @@ $('.simpan').on('click', function (e) {
       $('.tutup').attr('disabled', true);
     },
     success: function (data) {
+      console.log(dataform);
       table.ajax.reload(function (json) {
         json.response;
       });
@@ -295,3 +269,36 @@ $(document).on('click', '.edtsimpan', function (e) {
     },
   })
 })
+
+
+$(document).on('ready', function () {
+  $("#moneyInput, #money_input, .currency_input, .money").maskMoney({ thousands:'.', decimal:',', affixesStay: false, precision: 0});
+
+  var aydi = $('.dataselect').attr('id'),
+  hitung = aydi.split('-');
+for (let a = 0; a < hitung.length; a++) {
+var link = $('#select-' + a).data('link');
+$.ajax({
+  url: link,
+  type: 'GET',
+  dataType: 'json',
+  error: function () { // if error occured
+    // Swal.fire({
+    //   position: 'top-end',
+    //   icon: 'error',
+    //   title: 'Koneksi bermasalah!',
+    //   showConfirmButton: false,
+    //   timer: 1500
+    // })
+  },
+  success: function (select) {
+    var no = 1;
+    $.each(select, function(keyselect, valueselect) {
+      $('#select-' + keyselect).html(valueselect);
+    })
+  }
+})
+}
+})
+
+

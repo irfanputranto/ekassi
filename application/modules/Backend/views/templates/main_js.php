@@ -53,7 +53,8 @@
 <script src="<?= base_url() ?>assets/frontend/vendors/pdfmake/build/vfs_fonts.js"></script>
 <!-- validator -->
 <script src="<?= base_url() ?>assets/frontend/vendors/validator/validator.js"></script>
-
+<!-- format uang -->
+<script src="<?= base_url() ?>assets/frontend/build/js/jquery.maskMoney.min.js"></script>
 <!-- sweetalert2 -->
 <script src="<?= base_url() ?>node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
 

@@ -157,9 +157,9 @@ class My_models extends CI_Model
     //     return $pict;
     // }
 
-    function cKode($select = null, $table = null, $where = null) //kode kk
+    function cKode($select = null, $table = null, $where = null, $kode = null) //kode kk
     {
-        $q = $this->db->query("SELECT MAX(RIGHT(kdbukti,2)) AS kd_max FROM tb_kaskeluar WHERE DATE(tanggal)=CURDATE() and id_user= $id ");
+        $q = $this->db->query("SELECT $select FROM $table  $where");
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k) {
@@ -169,6 +169,6 @@ class My_models extends CI_Model
         } else {
             $kd = "01";
         }
-        return 'KK' . date('ymd') . '-' . $kd;
+        return $kode . date('ymd') . '-' . $kd;
     }
 }
