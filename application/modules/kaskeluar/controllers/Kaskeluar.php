@@ -97,6 +97,16 @@ class Kaskeluar extends BackendController
             ->set_output(json_encode($json));
     }
 
+    public function test()
+    {
+        $select = 'MAX(RIGHT(kdbuktikk,2)) AS kd_max';
+        $table = 'tb_kas_keluar';
+        $where = "WHERE to_char(tanggal_kk, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD')";
+        $kd = $this->models->cKode($select, $table, $where, 'KK');
+        var_dump($kd);
+        die;
+    }
+
     public function insert()
     {
         $json = [];
@@ -129,8 +139,7 @@ class Kaskeluar extends BackendController
             # code..
             $select = 'MAX(RIGHT(kdbuktikk,2)) AS kd_max';
             $table = 'tb_kas_keluar';
-            $where = 'WHERE DATE(tanggal_kk)=CURRENT_DATE';
-            // and id_user= $id 
+            $where = "WHERE to_char(tanggal_kk, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD')";
             $kd = $this->models->cKode($select, $table, $where, 'KK');
 
             $strreplace = [

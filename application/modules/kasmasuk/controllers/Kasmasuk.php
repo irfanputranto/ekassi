@@ -98,16 +98,7 @@ class Kasmasuk extends BackendController
             ->set_output(json_encode($json));
     }
 
-    public function test()
-    {
-        $date = date('Y-m-d');
-        $select = 'MAX(RIGHT(kdbuktikm,2)) AS kd_max';
-        $table = 'tb_kas_masuk';
-        $where = "WHERE TO_TIMESTAMP('2020-11-09 22:51:14', 'YYYY-MM-DD HH:MI:SS') = $date";
-        // and id_user= $id 
-        $kd = $this->models->cKode($select, $table, $where, 'KM');
-        var_dump($kd);
-    }
+
 
     public function insert()
     {
@@ -139,11 +130,9 @@ class Kasmasuk extends BackendController
             ];
         } else {
             # code..
-            $date = date('Y-m-d H:i:s');
             $select = 'MAX(RIGHT(kdbuktikm,2)) AS kd_max';
             $table = 'tb_kas_masuk';
-            $where = "WHERE tanggal_km = ";
-            // and id_user= $id 
+            $where = "WHERE to_char(tanggal_km, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD')";
             $kd = $this->models->cKode($select, $table, $where, 'KM');
 
             $strreplace = [
@@ -153,11 +142,11 @@ class Kasmasuk extends BackendController
             ];
             $rp = str_replace($strreplace, '', $jmlkm);
             $data = [
-                'kdbuktikm' => $kd,
-                'tanggal_km' => date('Y-m-d H:i:s'),
-                'id_kode_akun'     => $kdakun,
-                'jumlahkm'     => $rp,
-                'ket_km'     => $ketkm
+                'kdbuktikm'         => $kd,
+                'tanggal_km'        => date('Y-m-d H:i:s'),
+                'id_kode_akun'      => $kdakun,
+                'jumlahkm'          => $rp,
+                'ket_km'            => $ketkm
             ];
             $this->models->save('tb_kas_masuk', $data);
             $json = [

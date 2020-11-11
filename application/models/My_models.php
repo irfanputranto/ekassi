@@ -140,26 +140,9 @@ class My_models extends CI_Model
         return $pict;
     }
 
-    // public function fileedt($filename = null, $file = null)
-    // {
-    //     $config['upload_path']          = './assets/frontend/images';
-    //     $config['allowed_types']        = 'gif|jpg|png|jpeg';
-    //     $config['max_size']             = 10024;
-    //     $config['file_name']            = date('dmY-') . round(microtime(true));
-    //     $this->load->library('upload', $config);
-
-    //     if (!$this->upload->do_upload($filename)) {
-    //         $error = array('error' => $this->upload->display_errors());
-    //         $pict = $file;
-    //     } else {
-    //         $pict = 'assets/frontend/images/' . $this->upload->data('file_name');
-    //     }
-    //     return $pict;
-    // }
-
     function cKode($select = null, $table = null, $where = null, $kode = null) //kode kk
     {
-        $q = $this->db->query("SELECT $select FROM $table  $where");
+        $q = $this->db->query("SELECT $select FROM $table $where");
         $kd = "";
         if ($q->num_rows() > 0) {
             foreach ($q->result() as $k) {
