@@ -15,7 +15,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  *
  */
 
-class Kaskeluar extends BackendController
+class Kasmasuk extends BackendController
 {
     //
     public $CI;
@@ -26,8 +26,8 @@ class Kaskeluar extends BackendController
      */
 
     protected $data = array(
-        'title' => 'E-kas | Kas Keluar',
-        'subtitel' => 'Kas Keluar'
+        'title' => 'E-kas | Kas Masuk',
+        'subtitel' => 'Kas Masuk'
     );
 
     /**
@@ -56,19 +56,20 @@ class Kaskeluar extends BackendController
 
     public function get_data()
     {
-        $table = 'tb_kas_keluar';
-        $column_order = [null, 'tb_kas_keluar.tanggal_kk', 'tb_kas_keluar.ket_kk', 'tb_kas_keluar.id_kode_akun', 'tb_kas_keluar.jumlahkk', 'tb_kas_keluar.kdbuktikk'];
-        $column_search = ['tb_kas_keluar.tanggal_kk', 'tb_kas_keluar.ket_kk', 'tb_kas_keluar.id_kode_akun', 'tb_kas_keluar.jumlahkk', 'tb_kas_keluar.kdbuktikk'];
-        $order = ['tb_kas_keluar.id_kk' => 'desc'];
+        $table = 'tb_kas_masuk';
+        $column_order = [null, 'tb_kas_masuk.tanggal_km', 'tb_kas_masuk.ket_km', 'tb_kas_masuk.id_kode_akun', 'tb_kas_masuk.jumlahkm', 'tb_kas_masuk.kdbuktikm'];
+        $column_search = ['tb_kas_masuk.tanggal_km', 'tb_kas_masuk.ket_km', 'tb_kas_masuk.id_kode_akun', 'tb_kas_masuk.jumlahkm', 'tb_kas_masuk.kdbuktikm'];
+        $order = ['tb_kas_masuk.id_km' => 'desc'];
         $join = [
-            'tb_data_akun' => 'tb_data_akun.id_kode_akun = tb_kas_keluar.id_kode_akun'
+            'tb_data_akun' => 'tb_data_akun.id_kode_akun = tb_kas_masuk.id_kode_akun'
         ];
 
 
         /*
          * Data Site Datatables
          */
-        // $this->db->where('tb_kas_keluar.tanggal_kk', date('Y-m-d'));
+        // $this->db->where('tb_kas_masuk.tanggal_km >', date('Y-m-d'));
+        // $this->db->where('tb_kas_masuk.tanggal_km <', date('Y-m-d'));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];
@@ -76,13 +77,13 @@ class Kaskeluar extends BackendController
             $no++;
             $row = [];
             $row[] = $no;
-            $row[] = date("d-m-Y", strtotime($field['tanggal_kk']));
-            $row[] = $field['kdbuktikk'];
+            $row[] = date("d-m-Y H:i:s", strtotime($field['tanggal_km']));
+            $row[] = $field['kdbuktikm'];
             $row[] = $field['kode_akun'];
             $row[] = $field['nama_akun'];
-            $row[] = $field['ket_kk'];
-            $row[] = 'Rp. ' . number_format($field['jumlahkk'], 0, ',', '.');
-            $row[] = '<a class="ubah" data-link="' . base_url('kk/ubah/') . $field['id_kk'] . '"><i class="fa fa-edit blue"></i></a>';
+            $row[] = $field['ket_km'];
+            $row[] = 'Rp. ' . number_format($field['jumlahkm'], 0, ',', '.');
+            $row[] = '<a class="ubah" data-link="' . base_url('km/ubah/') . $field['id_km'] . '"><i class="fa fa-edit blue"></i></a>';
             $data[] = $row;
         }
 
@@ -97,22 +98,33 @@ class Kaskeluar extends BackendController
             ->set_output(json_encode($json));
     }
 
+    public function test()
+    {
+        $date = date('Y-m-d');
+        $select = 'MAX(RIGHT(kdbuktikm,2)) AS kd_max';
+        $table = 'tb_kas_masuk';
+        $where = "WHERE TO_TIMESTAMP('2020-11-09 22:51:14', 'YYYY-MM-DD HH:MI:SS') = $date";
+        // and id_user= $id 
+        $kd = $this->models->cKode($select, $table, $where, 'KM');
+        var_dump($kd);
+    }
+
     public function insert()
     {
         $json = [];
         $kdakun   = htmlspecialchars($this->input->post('kdakun'));
-        $jmlkk  = htmlspecialchars($this->input->post('jmlkk'));
-        $ketkk  = htmlspecialchars($this->input->post('ketkk'));
+        $jmlkm  = htmlspecialchars($this->input->post('jmlkm'));
+        $ketkm  = htmlspecialchars($this->input->post('ketkm'));
 
 
 
         $this->form_validation->set_rules('kdakun', 'Kode Akun', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
-        $this->form_validation->set_rules('jmlkk', 'Jumlah', 'required', [
+        $this->form_validation->set_rules('jmlkm', 'Jumlah', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
-        $this->form_validation->set_rules('ketkk', 'Keterangan', 'required', [
+        $this->form_validation->set_rules('ketkm', 'Keterangan', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
@@ -122,36 +134,37 @@ class Kaskeluar extends BackendController
             $json = [
                 'status'     => '0',
                 'kdakun'     => form_error('kdakun'),
-                'jmlkk'      => form_error('jmlkk'),
-                'ketkk'      => form_error('ketkk')
+                'jmlkm'      => form_error('jmlkm'),
+                'ketkm'      => form_error('ketkm')
             ];
         } else {
             # code..
-            $select = 'MAX(RIGHT(kdbuktikk,2)) AS kd_max';
-            $table = 'tb_kas_keluar';
-            $where = 'WHERE DATE(tanggal_kk)=CURRENT_DATE';
+            $date = date('Y-m-d H:i:s');
+            $select = 'MAX(RIGHT(kdbuktikm,2)) AS kd_max';
+            $table = 'tb_kas_masuk';
+            $where = "WHERE tanggal_km = ";
             // and id_user= $id 
-            $kd = $this->models->cKode($select, $table, $where, 'KK');
+            $kd = $this->models->cKode($select, $table, $where, 'KM');
 
             $strreplace = [
                 '.',
                 'Rp',
                 ' '
             ];
-            $rp = str_replace($strreplace, '', $jmlkk);
+            $rp = str_replace($strreplace, '', $jmlkm);
             $data = [
-                'kdbuktikk' => $kd,
-                'tanggal_kk' => date('Y-m-d'),
+                'kdbuktikm' => $kd,
+                'tanggal_km' => date('Y-m-d H:i:s'),
                 'id_kode_akun'     => $kdakun,
-                'jumlahkk'     => $rp,
-                'ket_kk'     => $ketkk
+                'jumlahkm'     => $rp,
+                'ket_km'     => $ketkm
             ];
-            $this->models->save('tb_kas_keluar', $data);
+            $this->models->save('tb_kas_masuk', $data);
             $json = [
                 'status' => '1',
                 'kdakun',
-                'jmlkk',
-                'ketkk'
+                'jmlkm',
+                'ketkm'
             ];
         }
         $this->output
@@ -163,16 +176,16 @@ class Kaskeluar extends BackendController
     {
         $json = [];
         $where = [
-            'id_kk' => $id
+            'id_km' => $id
         ];
-        $value = $this->models->get_data(null, 'tb_kas_keluar', $where)->row_array();
+        $value = $this->models->get_data(null, 'tb_kas_masuk', $where)->row_array();
 
         $json = [
             'status'            => '1',
-            'id_kk'             => $value['id_kk'],
+            'id_km'             => $value['id_km'],
             'id_kode_akun'      => $value['id_kode_akun'],
-            'jumlahkk'          => $value['jumlahkk'],
-            'ket_kk'          => $value['ket_kk']
+            'jumlahkm'          => $value['jumlahkm'],
+            'ket_km'          => $value['ket_km']
         ];
         $this->output
             ->set_content_type('application/json')
@@ -182,22 +195,22 @@ class Kaskeluar extends BackendController
     public function update()
     {
         $json           = [];
-        $id_kk          = htmlspecialchars($this->input->post('id_kk'));
+        $id_km          = htmlspecialchars($this->input->post('id_km'));
         $id_kode_akun   = htmlspecialchars($this->input->post('id_kode_akun'));
-        $jumlahkk       = htmlspecialchars($this->input->post('jumlahkk'));
-        $ket_kk         = htmlspecialchars($this->input->post('ket_kk'));
+        $jumlahkm       = htmlspecialchars($this->input->post('jumlahkm'));
+        $ket_km         = htmlspecialchars($this->input->post('ket_km'));
 
-        $this->form_validation->set_rules('id_kk', 'id data kk', 'required', [
+        $this->form_validation->set_rules('id_km', 'id data km', 'required', [
             'required' => '0'
         ]);
         $this->form_validation->set_rules('id_kode_akun', 'Kode Akun', 'required', [
             'required' => 'Pilih %s'
         ]);
 
-        $this->form_validation->set_rules('jumlahkk', 'Jumlah', 'required', [
+        $this->form_validation->set_rules('jumlahkm', 'Jumlah', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
-        $this->form_validation->set_rules('ket_kk', 'Keterangan', 'required', [
+        $this->form_validation->set_rules('ket_km', 'Keterangan', 'required', [
             'required' => '%s Tidak Boleh Kosong'
         ]);
         $this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
@@ -206,10 +219,10 @@ class Kaskeluar extends BackendController
             # code...
             $json = [
                 'status'     => '0',
-                'id_kk'  => form_error('id_kk'),
+                'id_km'  => form_error('id_km'),
                 'id_kode_akun'   => form_error('id_kode_akun'),
-                'jumlahkk'   => form_error('jumlahkk'),
-                'ket_kk'   => form_error('ket_kk')
+                'jumlahkm'   => form_error('jumlahkm'),
+                'ket_km'   => form_error('ket_km')
             ];
         } else {
             # code..
@@ -218,23 +231,23 @@ class Kaskeluar extends BackendController
                 'Rp',
                 ' '
             ];
-            $rp = str_replace($strreplace, '', $jumlahkk);
+            $rp = str_replace($strreplace, '', $jumlahkm);
 
             $data = [
                 'id_kode_akun'    => $id_kode_akun,
-                'jumlahkk'        => $rp,
-                'ket_kk'          => $ket_kk
+                'jumlahkm'        => $rp,
+                'ket_km'          => $ket_km
             ];
             $where = [
-                'id_kk' => $id_kk
+                'id_km' => $id_km
             ];
-            $this->models->edit('tb_kas_keluar', $data, $where);
+            $this->models->edit('tb_kas_masuk', $data, $where);
             $json = [
                 'status' => '1',
-                'id_kk',
+                'id_km',
                 'id_kode_akun',
-                'jumlahkk',
-                'ket_kk'
+                'jumlahkm',
+                'ket_km'
             ];
         }
         $this->output
@@ -254,9 +267,9 @@ class Kaskeluar extends BackendController
         } else {
             # code...
             $where = [
-                'id_kk' => $id
+                'id_km' => $id
             ];
-            $this->models->delete('tb_kas_keluar', $where);
+            $this->models->delete('tb_kas_masuk', $where);
             $json  = [
                 'status' => '1'
             ];

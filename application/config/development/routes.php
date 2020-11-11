@@ -96,3 +96,12 @@ $route['kk/ubah/(:any)'] = 'Kaskeluar/put/$1';
 $route['kk/put'] = 'Kaskeluar/update';
 $route['kk/hapus/(:any)'] = 'Kaskeluar/destroy/$1';
 $route['kk/kodeakun'] = 'Kaskeluar/kdakun';
+
+// Kasekluar Link
+$route['km'] = 'Kasmasuk';
+$route['km/data'] = 'Kasmasuk/get_data';
+$route['km/tambah'] = 'Kasmasuk/insert';
+$route['km/ubah/(:any)'] = 'Kasmasuk/put/$1';
+$route['km/put'] = 'Kasmasuk/update';
+$route['km/hapus/(:any)'] = 'Kasmasuk/destroy/$1';
+$route['km/kodeakun'] = 'Kasmasuk/kdakun';
