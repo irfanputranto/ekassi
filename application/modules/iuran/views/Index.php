@@ -23,19 +23,29 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('anggota/data'); ?> cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('ia/data'); ?> data-foot="iuran" cellspacing="0" width="100%">
                              <thead>
                                  <tr>
-                                     <th>No.</th>
-                                     <th>Nama Anggota</th>
-                                     <th>Jenis Kelamin</th>
-                                     <th>Jabatan</th>
-                                     <th>Foto</th>
-                                     <th>Aksi</th>
+                                     <th class="text-center">No.</th>
+                                     <th class="text-center">Tanggal</th>
+                                     <th class="text-center">Kode Akun</th>
+                                     <th class="text-center">Nama Akun</th>
+                                     <th class="text-center">Nama Anggota</th>
+                                     <th class="text-center">Jabatan</th>
+                                     <th class="text-center">Keterangan</th>
+                                     <th class="text-center">Total</th>
+                                     <th class="text-center">Aksi</th>
                                  </tr>
                              </thead>
                              <tbody>
                              </tbody>
+                             <tfoot>
+                                 <tr>
+                                     <th colspan="7" class="text-center">Total</th>
+                                     <th></th>
+                                     <th></th>
+                                 </tr>
+                             </tfoot>
                          </table>
                      </div>
                  </div>
@@ -55,47 +65,51 @@
              </div>
              <form id="form" class="form-horizontal form-label-left">
                  <div class="modal-body">
-                     <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_anggota">Nama Anggota
-                         </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 input-nama_anggota clear-nama_anggota" name="nama_anggota" placeholder="Nama Anggota" type="text" autocomplete="off">
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis Kelamin
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kdakun">Kode Akun
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jenis_kelamin" id="select-0" class="form-control col-md-7 col-xs-12 input-jenis_kelamin clear-jenis_kelamin dataselect" data-link="<?= base_url('Anggota/jenis_kelamin') ?>">
+                             <select name="kdakun" id="select-0" class="form-control col-md-7 col-xs-12 input-kdakun clear-kdakun dataselect" data-link="<?= base_url('ia/kodeakun') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="anggota">Anggota
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jabatan" id="select-1" class="form-control col-md-7 col-xs-12 input-jabatan clear-jabatan dataselect" data-link="<?= base_url('Anggota/jabatan') ?>">
+                             <select name="anggota" id="select-1" class="form-control col-md-7 col-xs-12 input-anggota clear-anggota dataselect" data-link="<?= base_url('ia/anggota') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
+
+
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jmlhiuran">Jumlah (Rp.)
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
+                             <input class="form-control col-md-7 col-xs-12 input-jmlhiuran clear-jmlhiuran money" name="jmlhiuran" placeholder="Jumlah (Rp.)" type="text" autocomplete="off" data-affixes-stay="true" data-prefix="Rp " data-thousands="." data-decimal="," data-precision="0">
                              <span class="help-block"></span>
                          </div>
                      </div>
+
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ketiuran">Keterangan
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <textarea name="ketiuran" cols="2" rows="2" class="form-control col-md-7 col-xs-12 input-ketiuran clear-ketiuran" placeholder="Keterangan"></textarea>
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
+
 
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('anggota/tambah'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
+                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('ia/tambah'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
                  </div>
              </form>
          </div>
@@ -113,48 +127,50 @@
              </div>
              <form class="form-horizontal form-label-left">
                  <div class="modal-body">
-                     <input type="hidden" name="id_anggota" class="edtinput-id_anggota clear-id_anggota">
+                     <input type="hidden" name="id_iuran" class="edtinput-id_iuran clear-id_iuran">
+
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_anggota">Nama Anggota
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="id_kode_akun">Kode Akun
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_anggota clear-nama_anggota" name="nama_anggota" placeholder="Nama Anggota" type="text" autocomplete="off">
+                             <select name="id_kode_akun" id="select-2" class="form-control col-md-7 col-xs-12 edtinput-id_kode_akun clear-id_kode_akun dataselect" data-link="<?= base_url('ia/kodeakun') ?>">
+                             </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis Kelamin
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="anggota">Anggota
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jenis_kelamin" id="select-2" class="form-control col-md-7 col-xs-12 edtinput-jenis_kelamin clear-jenis_kelamin dataselect" data-link="<?= base_url('Anggota/jenis_kelamin') ?>">
+                             <select name="anggota" id="select-3" class="form-control col-md-7 col-xs-12 edtinput-anggota clear-anggota dataselect" data-link="<?= base_url('ia/anggota') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
+
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jmlhiuran">Jumlah (Rp.)
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jabatan" id="select-3" class="form-control col-md-7 col-xs-12 edtinput-jabatan clear-jabatan dataselect" data-link="<?= base_url('Anggota/jabatan') ?>">
-                             </select>
+                             <input class="form-control col-md-7 col-xs-12 edtinput-jmlhiuran clear-jmlhiuran money" name="jmlhiuran" placeholder="Jumlah (Rp.)" type="text" autocomplete="off" data-affixes-stay="true" data-prefix="Rp " data-thousands="." data-decimal="," data-precision="0">
                              <span class="help-block"></span>
                          </div>
                      </div>
+
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ketiuran">Keterangan
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
+                             <textarea name="ketiuran" cols="2" rows="2" class="form-control col-md-7 col-xs-12 edtinput-ketiuran clear-ketiuran" placeholder="Keterangan"></textarea>
                              <span class="help-block"></span>
-                             <input type="hidden" name="fileedt" class="edtinput-fileedt clear-fileedt">
                          </div>
                      </div>
 
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('anggota/put'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
+                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('ia/put'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
                  </div>
              </form>
          </div>

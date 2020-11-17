@@ -97,6 +97,7 @@ $route['kk/put'] = 'Kaskeluar/update';
 $route['kk/hapus/(:any)'] = 'Kaskeluar/destroy/$1';
 $route['kk/kodeakun'] = 'Kaskeluar/kdakun';
 
+
 // Kasekluar Link
 $route['km'] = 'Kasmasuk';
 $route['km/data'] = 'Kasmasuk/get_data';
@@ -105,3 +106,22 @@ $route['km/ubah/(:any)'] = 'Kasmasuk/put/$1';
 $route['km/put'] = 'Kasmasuk/update';
 $route['km/hapus/(:any)'] = 'Kasmasuk/destroy/$1';
 $route['km/kodeakun'] = 'Kasmasuk/kdakun';
+
+// Kasekluar Link
+$route['jn'] = 'Jurnal';
+$route['jn/data'] = 'Jurnal/get_data';
+$route['jn/tambah'] = 'Jurnal/insert';
+$route['jn/ubah/(:any)'] = 'Jurnal/put/$1';
+$route['jn/put'] = 'Jurnal/update';
+$route['jn/hapus/(:any)'] = 'Jurnal/destroy/$1';
+$route['jn/kodeakun'] = 'Jurnal/kdakun';
+
+// Kasekluar Link
+$route['ia'] = 'Iuran';
+$route['ia/data'] = 'Iuran/get_data';
+$route['ia/tambah'] = 'Iuran/insert';
+$route['ia/ubah/(:any)'] = 'Iuran/put/$1';
+$route['ia/put'] = 'Iuran/update';
+$route['ia/hapus/(:any)'] = 'Iuran/destroy/$1';
+$route['ia/kodeakun'] = 'Iuran/kdakun';
+$route['ia/anggota'] = 'Iuran/kdiurananggota';

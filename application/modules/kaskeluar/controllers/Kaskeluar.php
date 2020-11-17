@@ -54,6 +54,7 @@ class Kaskeluar extends BackendController
         $this->render_page('Index', $this->data);
     }
 
+
     public function get_data()
     {
         $table = 'tb_kas_keluar';
@@ -68,7 +69,8 @@ class Kaskeluar extends BackendController
         /*
          * Data Site Datatables
          */
-        // $this->db->where('tb_kas_keluar.tanggal_kk', date('Y-m-d'));
+        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime('-1 month')));
+        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') <=", date('Y-m-d'));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];
@@ -76,7 +78,7 @@ class Kaskeluar extends BackendController
             $no++;
             $row = [];
             $row[] = $no;
-            $row[] = date("d-m-Y", strtotime($field['tanggal_kk']));
+            $row[] = date("d-m-Y H:i:s", strtotime($field['tanggal_kk']));
             $row[] = $field['kdbuktikk'];
             $row[] = $field['kode_akun'];
             $row[] = $field['nama_akun'];
@@ -150,7 +152,7 @@ class Kaskeluar extends BackendController
             $rp = str_replace($strreplace, '', $jmlkk);
             $data = [
                 'kdbuktikk' => $kd,
-                'tanggal_kk' => date('Y-m-d'),
+                'tanggal_kk' => date('Y-m-d H:i:s'),
                 'id_kode_akun'     => $kdakun,
                 'jumlahkk'     => $rp,
                 'ket_kk'     => $ketkk

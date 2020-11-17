@@ -2,9 +2,6 @@
  <div class="right_col" role="main">
      <div class="">
          <div class="page-title">
-             <div class="title_left">
-                 <h3><?= $subtitel; ?> </h3>
-             </div>
 
          </div>
 
@@ -87,7 +84,7 @@
                          <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ketkm">Keterangan
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <textarea name="ketkm" cols="2" rows="2" class="form-control col-md-7 col-xs-12 input-jmlkm clear-ketkm" placeholder="Keterangan"></textarea>
+                             <textarea name="ketkm" cols="2" rows="2" class="form-control col-md-7 col-xs-12 input-ketkm clear-ketkm" placeholder="Keterangan"></textarea>
                              <span class="help-block"></span>
                          </div>
                      </div>

@@ -54,6 +54,12 @@ class Kasmasuk extends BackendController
         $this->render_page('Index', $this->data);
     }
 
+    public function test()
+    {
+        $tgl = date('Y-m-d', strtotime('+1 month'));
+        var_dump($tgl);
+    }
+
     public function get_data()
     {
         $table = 'tb_kas_masuk';
@@ -63,13 +69,11 @@ class Kasmasuk extends BackendController
         $join = [
             'tb_data_akun' => 'tb_data_akun.id_kode_akun = tb_kas_masuk.id_kode_akun'
         ];
-
-
         /*
          * Data Site Datatables
          */
-        // $this->db->where('tb_kas_masuk.tanggal_km >', date('Y-m-d'));
-        // $this->db->where('tb_kas_masuk.tanggal_km <', date('Y-m-d'));
+        $this->db->where("to_char(tanggal_km, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime('-1 month')));
+        $this->db->where("to_char(tanggal_km, 'YYYY-MM-DD') <=", date('Y-m-d'));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];
@@ -137,7 +141,7 @@ class Kasmasuk extends BackendController
 
             $strreplace = [
                 '.',
-                'Rp',
+                'Rp ',
                 ' '
             ];
             $rp = str_replace($strreplace, '', $jmlkm);

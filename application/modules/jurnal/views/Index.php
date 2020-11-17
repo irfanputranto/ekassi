@@ -23,19 +23,30 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('anggota/data'); ?> cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('jn/data'); ?> data-foot="jurnal" cellspacing="0" width="100%">
                              <thead>
                                  <tr>
                                      <th>No.</th>
-                                     <th>Nama Anggota</th>
-                                     <th>Jenis Kelamin</th>
-                                     <th>Jabatan</th>
-                                     <th>Foto</th>
+                                     <th>Tanggal</th>
+                                     <th>Kode Jurnal</th>
+                                     <th>Keterangan</th>
+                                     <th>Kode Akun</th>
+                                     <th>Nama Akun</th>
+                                     <th>Debet</th>
+                                     <th>Kredit</th>
                                      <th>Aksi</th>
                                  </tr>
                              </thead>
                              <tbody>
                              </tbody>
+                             <tfoot>
+                                 <tr>
+                                     <th colspan="6" class="text-center"></th>
+                                     <th></th>
+                                     <th></th>
+                                     <th></th>
+                                 </tr>
+                             </tfoot>
                          </table>
                      </div>
                  </div>
@@ -56,46 +67,45 @@
              <form id="form" class="form-horizontal form-label-left">
                  <div class="modal-body">
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_anggota">Nama Anggota
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="debet">Debet
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 input-nama_anggota clear-nama_anggota" name="nama_anggota" placeholder="Nama Anggota" type="text" autocomplete="off">
+                             <select name="debet" id="select-1" class="form-control col-md-7 col-xs-12 input-debet clear-debet dataselect" data-link="<?= base_url('jn/kodeakun') ?>">
+                             </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
-
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis Kelamin
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="kredit">Kredit
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jenis_kelamin" id="select-0" class="form-control col-md-7 col-xs-12 input-jenis_kelamin clear-jenis_kelamin dataselect" data-link="<?= base_url('Anggota/jenis_kelamin') ?>">
+                             <select name="kredit" id="select-2" class="form-control col-md-7 col-xs-12 input-kredit clear-kredit dataselect" data-link="<?= base_url('jn/kodeakun') ?>">
                              </select>
                              <span class="help-block"></span>
                          </div>
                      </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jmljurnal">Jumlah (Rp.)
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jabatan" id="select-1" class="form-control col-md-7 col-xs-12 input-jabatan clear-jabatan dataselect" data-link="<?= base_url('Anggota/jabatan') ?>">
-                             </select>
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
-                         </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
+                             <input class="form-control col-md-7 col-xs-12 input-jmljurnal clear-jmljurnal money" name="jmljurnal" placeholder="Jumlah (Rp.)" type="text" autocomplete="off" data-affixes-stay="true" data-prefix="Rp " data-thousands="." data-decimal="," data-precision="0">
                              <span class="help-block"></span>
                          </div>
                      </div>
 
+                     <div class="item form-group">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ketjunral">Keterangan
+                         </label>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                             <textarea name="ketjunral" cols="2" rows="2" class="form-control col-md-7 col-xs-12 input-ketjunral clear-ketjunral" placeholder="Keterangan"></textarea>
+                             <span class="help-block"></span>
+                         </div>
+                     </div>
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('anggota/tambah'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
+                     <button type="button" class="btn btn-primary simpan" data-link="<?= base_url('jn/tambah'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
                  </div>
              </form>
          </div>
@@ -113,48 +123,31 @@
              </div>
              <form class="form-horizontal form-label-left">
                  <div class="modal-body">
-                     <input type="hidden" name="id_anggota" class="edtinput-id_anggota clear-id_anggota">
+                     <input type="hidden" name="id_jurnal" class="edtinput-id_jurnal clear-id_jurnal">
+                     <input type="hidden" name="jenisdata" class="edtinput-jenisdata clear-jenisdata">
+
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nama_anggota">Nama Anggota
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jmljurnal">Jumlah (Rp.)
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input class="form-control col-md-7 col-xs-12 edtinput-nama_anggota clear-nama_anggota" name="nama_anggota" placeholder="Nama Anggota" type="text" autocomplete="off">
+                             <input class="form-control col-md-7 col-xs-12 edtinput-jmljurnal clear-jmljurnal money" name="jmljurnal" placeholder="Jumlah (Rp.)" type="text" autocomplete="off" data-affixes-stay="true" data-prefix="Rp " data-thousands="." data-decimal="," data-precision="0">
                              <span class="help-block"></span>
                          </div>
                      </div>
 
                      <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jenis_kelamin">Jenis Kelamin
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ketjunral">Keterangan
                          </label>
                          <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jenis_kelamin" id="select-2" class="form-control col-md-7 col-xs-12 edtinput-jenis_kelamin clear-jenis_kelamin dataselect" data-link="<?= base_url('Anggota/jenis_kelamin') ?>">
-                             </select>
+                             <textarea name="ketjunral" cols="2" rows="2" class="form-control col-md-7 col-xs-12 edtinput-ketjunral clear-ketjunral" placeholder="Keterangan"></textarea>
                              <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="jabatan">Jabatan
-                         </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <select name="jabatan" id="select-3" class="form-control col-md-7 col-xs-12 edtinput-jabatan clear-jabatan dataselect" data-link="<?= base_url('Anggota/jabatan') ?>">
-                             </select>
-                             <span class="help-block"></span>
-                         </div>
-                     </div>
-                     <div class="item form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="foto">Foto
-                         </label>
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="file" name="foto" placeholder="Foto" class="form-control col-md-7 col-xs-12 clear-foto">
-                             <span class="help-block"></span>
-                             <input type="hidden" name="fileedt" class="edtinput-fileedt clear-fileedt">
                          </div>
                      </div>
 
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-default tutup" data-dismiss="modal">Tutup</button>
-                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('anggota/put'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
+                     <button type="button" class="btn btn-primary edtsimpan" data-link="<?= base_url('jn/put'); ?>"><i class="fa fa-spinner fa-pulse loading" style="display: none;"></i> Simpan</button>
                  </div>
              </form>
          </div>

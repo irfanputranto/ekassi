@@ -86,7 +86,6 @@ $('.simpan').on('click', function (e) {
       $('.tutup').attr('disabled', true);
     },
     success: function (data) {
-      console.log(dataform);
       table.ajax.reload(function (json) {
         json.response;
       });
@@ -276,8 +275,9 @@ $(document).on('ready', function () {
 
   var aydi = $('.dataselect').attr('id'),
   hitung = aydi.split('-');
-for (let a = 0; a < hitung.length; a++) {
-var link = $('#select-' + a).data('link');
+  
+  for (let a = 0; a < hitung.length; a++) {
+    var link = $('#select-' + a).attr('data-link');
 $.ajax({
   url: link,
   type: 'GET',
@@ -294,6 +294,7 @@ $.ajax({
   success: function (select) {
     var no = 1;
     $.each(select, function(keyselect, valueselect) {
+     
       $('#select-' + keyselect).html(valueselect);
     })
   }

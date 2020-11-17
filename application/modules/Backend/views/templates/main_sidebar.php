@@ -34,11 +34,17 @@
                                     } ?>>
                                     <a href="<?= base_url('dashboard'); ?>"><i class="fa fa-home"></i> Dashboard</a>
                                 </li>
+                                <li <?php if ($this->uri->segment(1) == 'iuran') {
+                                        # code...
+                                        echo 'class="active"';
+                                    } ?>>
+                                    <a href="<?= base_url('iuran'); ?>"><i class="fa fa-money"></i> Iuran Anggota</a>
+                                </li>
                                 <li><a><i class="fa fa-desktop"></i> Keuangan <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?= base_url('kk') ?>">Kas Keluar</a></li>
                                         <li><a href="<?= base_url('km') ?>">Kas Masuk</a></li>
-                                        <li><a href="typography.html">Jurnal</a></li>
+                                        <li><a href="<?= base_url('jn') ?>">Jurnal</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>

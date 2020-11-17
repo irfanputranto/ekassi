@@ -26,8 +26,8 @@ class Regis extends BackendController
      */
 
     protected $data = array(
-        'title' => 'E-kas | akun',
-        'subtitel' => 'akun'
+        'title' => 'E-kas | Akun',
+        'subtitel' => 'Akun'
     );
 
     /**
