@@ -30,4 +30,17 @@
 
     <!-- Custom Theme Style -->
     <link href="<?= base_url() ?>assets/frontend/build/css/custom.min.css" rel="stylesheet">
+    <style>
+        .numericCol {
+            text-align: right;
+        }
+
+        td.dt-body-right {
+            text-align: right
+        }
+
+        .Colcenter {
+            text-align: center;
+        }
+    </style>
 </head>

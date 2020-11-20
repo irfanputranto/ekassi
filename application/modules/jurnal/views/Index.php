@@ -23,18 +23,18 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('jn/data'); ?> data-foot="jurnal" cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('jn/data'); ?> data-posisicol="6" data-posisicol1="7" data-foot="jurnal" cellspacing="0" width="100%">
                              <thead>
                                  <tr>
-                                     <th>No.</th>
-                                     <th>Tanggal</th>
-                                     <th>Kode Jurnal</th>
-                                     <th>Keterangan</th>
-                                     <th>Kode Akun</th>
-                                     <th>Nama Akun</th>
-                                     <th>Debet</th>
-                                     <th>Kredit</th>
-                                     <th>Aksi</th>
+                                     <th class="text-center">No.</th>
+                                     <th class="text-center">Tanggal</th>
+                                     <th class="text-center">Kode Jurnal</th>
+                                     <th class="text-center">Keterangan</th>
+                                     <th class="text-center">Kode Akun</th>
+                                     <th class="text-center">Nama Akun</th>
+                                     <th class="text-center">Debet</th>
+                                     <th class="text-center">Kredit</th>
+                                     <th class="text-center">Aksi</th>
                                  </tr>
                              </thead>
                              <tbody>
@@ -42,8 +42,8 @@
                              <tfoot>
                                  <tr>
                                      <th colspan="6" class="text-center"></th>
-                                     <th></th>
-                                     <th></th>
+                                     <th class="text-right"></th>
+                                     <th class="text-right"></th>
                                      <th></th>
                                  </tr>
                              </tfoot>

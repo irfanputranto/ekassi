@@ -20,28 +20,28 @@
 
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
 
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('km/data'); ?> cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('km/data'); ?> data-posisicol="6" data-foot="kaskeluar" cellspacing="0" width="100%">
                              <thead>
                                  <tr>
-                                     <th>No.</th>
-                                     <th>Tanggal</th>
-                                     <th>Kode Bukti</th>
-                                     <th>Kode Akun</th>
-                                     <th>Nama Akun</th>
-                                     <th>Keterangan</th>
-                                     <th>Total</th>
-                                     <th>Aksi</th>
+                                     <th class="text-center">No.</th>
+                                     <th class="text-center">Tanggal</th>
+                                     <th class="text-center">Kode Bukti</th>
+                                     <th class="text-center">Kode Akun</th>
+                                     <th class="text-center">Nama Akun</th>
+                                     <th class="text-center">Keterangan</th>
+                                     <th class="text-center">Total</th>
+                                     <th class="text-center">Aksi</th>
                                  </tr>
                              </thead>
                              <tbody>
                              </tbody>
-                             <!-- <tfoot>
+                             <tfoot>
                                  <tr>
-                                     <th colspan="5"></th>
-                                     <th style="text-align:right">Total:</th>
+                                     <th class="text-center" colspan="6"></th>
+                                     <th class="text-right"></th>
                                      <th></th>
                                  </tr>
-                             </tfoot> -->
+                             </tfoot>
                          </table>
                      </div>
                  </div>

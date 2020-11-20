@@ -68,8 +68,8 @@ $(document).ready(function () {
 })
 
 
-$('.simpan').on('click', function (e) {
-  e.preventDefault();
+$('.simpan').on('click', function (event) {
+  event.preventDefault();
   var dataform = new FormData(this.form);
   var action = $(this).attr('data-link');
   $.ajax({

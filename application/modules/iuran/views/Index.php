@@ -20,10 +20,8 @@
                          <div class="clearfix"></div>
                      </div>
                      <div class="x_content">
-
                          <a class="btn btn-round btn-primary mb-5 mt-5 inputdata" data-toggle="modal" data-target=".modalbutton"> <span class="fa fa-plus"></span> Tambah</a>
-
-                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('ia/data'); ?> data-foot="iuran" cellspacing="0" width="100%">
+                         <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" data-link=<?= base_url('ia/data'); ?> data-posisicol="7" data-foot="iuran" cellspacing="0" width="100%">
                              <thead>
                                  <tr>
                                      <th class="text-center">No.</th>
