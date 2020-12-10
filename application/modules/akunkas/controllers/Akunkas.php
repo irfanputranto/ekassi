@@ -39,6 +39,7 @@ class Akunkas extends BackendController
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+        BackendController::check_logged_in('login');
     }
 
     /**
@@ -56,8 +57,9 @@ class Akunkas extends BackendController
 
     public function get_data()
     {
+        // $select = 'kode_akun::int2 = kode_akun::text';
         $table = 'tb_data_akun';
-        $column_order = [null, 'kode_akun', 'nama_akun'];
+        $column_order = [null, 'tb_data_akun.kode_akun', 'tb_data_akun.nama_akun'];
         $column_search = ['kode_akun', 'nama_akun'];
         $order = ['tb_data_akun.id_kode_akun' => 'desc'];
         /*

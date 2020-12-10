@@ -4,7 +4,6 @@ function stopRKey(evt) {
   if ((evt.keyCode == 13) && (node.type=="text"))  {return false;}
 }
   document.onkeypress = stopRKey;
-
   
 $(document).ready(function () {
   $('#error').html(" ");
@@ -64,8 +63,20 @@ $(document).ready(function () {
     });
     return false;
   });
-
+  dashboard();
 })
+
+function dashboard(){
+  var link  = $('.datakeuangan').data('link');
+  $.ajax({
+    url: link,
+    type: 'GET',
+    dataType: 'json',
+    success:function(data) {
+      $('.datakeuangan').html(data.data);
+    }
+  })
+}
 
 
 $('.simpan').on('click', function (event) {
@@ -278,28 +289,36 @@ $(document).on('ready', function () {
   
   for (let a = 0; a < hitung.length; a++) {
     var link = $('#select-' + a).attr('data-link');
-$.ajax({
-  url: link,
-  type: 'GET',
-  dataType: 'json',
-  error: function () { // if error occured
-    // Swal.fire({
-    //   position: 'top-end',
-    //   icon: 'error',
-    //   title: 'Koneksi bermasalah!',
-    //   showConfirmButton: false,
-    //   timer: 1500
-    // })
-  },
-  success: function (select) {
-    var no = 1;
-    $.each(select, function(keyselect, valueselect) {
+      $.ajax({
+        url: link,
+        type: 'GET',
+        dataType: 'json',
+        error: function () { // if error occured
+          // Swal.fire({
+          //   position: 'top-end',
+          //   icon: 'error',
+          //   title: 'Koneksi bermasalah!',
+          //   showConfirmButton: false,
+          //   timer: 1500
+          // })
+        },
+        success: function (select) {
+          var no = 1;
+          $.each(select, function(keyselect, valueselect) {
+          
+            $('#select-' + keyselect).html(valueselect);
+          })
+        }
+      })
+      }
+
+})
+
+$(document).ready(function() {
+    $('.applyBtn').on('click',function() {
      
-      $('#select-' + keyselect).html(valueselect);
+      table.ajax.reload(function (json) {
+        json.response;
+      });
     })
-  }
 })
-}
-})
-
-

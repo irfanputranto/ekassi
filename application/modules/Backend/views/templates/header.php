@@ -7,8 +7,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title><?= $title; ?></title>
+    <?php if ($this->uri->segment(1) == 'laporaniuran') { ?>
+        <title><?= $laporantitle; ?></title>
+    <?php } else { ?>
+        <title><?= $title; ?></title>
+    <?php } ?>
 
     <!-- Bootstrap -->
     <link href="<?= base_url() ?>assets/frontend/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

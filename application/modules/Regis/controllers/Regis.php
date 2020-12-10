@@ -39,6 +39,7 @@ class Regis extends BackendController
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+        BackendController::check_logged_in('login');
     }
 
     /**
@@ -57,8 +58,8 @@ class Regis extends BackendController
     public function get_data()
     {
         $table = 'tb_akun';
-        $column_order = [null, 'nama_akun', 'username', 'image_akun', 'id_level'];
-        $column_search = ['nama_akun', 'username', 'image_akun', 'id_level'];
+        $column_order = [null, 'nama_akun', 'username', 'image_akun', 'tb_level.level'];
+        $column_search = ['nama_akun', 'username', 'image_akun', 'tb_level.level'];
         $order = ['tb_akun.id_akun' => 'asc'];
         $join = [
             'tb_level' => 'tb_level.id_level = tb_akun.id_level'

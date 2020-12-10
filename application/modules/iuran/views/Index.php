@@ -31,7 +31,7 @@
                                      <th class="text-center">Nama Anggota</th>
                                      <th class="text-center">Jabatan</th>
                                      <th class="text-center">Keterangan</th>
-                                     <th class="text-center">Total</th>
+                                     <th class="text-center">Jumlah</th>
                                      <th class="text-center">Aksi</th>
                                  </tr>
                              </thead>
@@ -40,7 +40,7 @@
                              <tfoot>
                                  <tr>
                                      <th colspan="7" class="text-center">Total</th>
-                                     <th></th>
+                                     <th class="text-right"></th>
                                      <th></th>
                                  </tr>
                              </tfoot>

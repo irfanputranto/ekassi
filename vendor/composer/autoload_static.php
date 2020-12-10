@@ -12,6 +12,10 @@ class ComposerStaticInitd88696e2a4603cee166fc79f1fcedfd8
     );
 
     public static $prefixLengthsPsr4 = array (
+        's' => 
+        array (
+            'setasign\\Fpdi\\' => 14,
+        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
@@ -30,6 +34,10 @@ class ComposerStaticInitd88696e2a4603cee166fc79f1fcedfd8
         array (
             'Psr\\Log\\' => 8,
         ),
+        'M' => 
+        array (
+            'Mpdf\\' => 5,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -38,6 +46,10 @@ class ComposerStaticInitd88696e2a4603cee166fc79f1fcedfd8
     );
 
     public static $prefixDirsPsr4 = array (
+        'setasign\\Fpdi\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/setasign/fpdi/src',
+        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
@@ -63,6 +75,10 @@ class ComposerStaticInitd88696e2a4603cee166fc79f1fcedfd8
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Mpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (

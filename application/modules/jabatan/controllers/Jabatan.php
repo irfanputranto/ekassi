@@ -39,6 +39,7 @@ class Jabatan extends BackendController
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+        BackendController::check_logged_in('login');
     }
 
     /**

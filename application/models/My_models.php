@@ -56,10 +56,10 @@ class My_models extends CI_Model
                     if ($i === 0) {
                         # code...
                         $this->db->group_start();
-                        $this->db->like($items, $_POST['search']['value']);
+                        $this->db->like('cast(' . $items . ' as text)', $_POST['search']['value']);
                     } else {
                         # code...
-                        $this->db->or_like($items, $_POST['search']['value']);
+                        $this->db->or_like('cast(' . $items . ' as text)', $_POST['search']['value']);
                     }
                     if (count($column_search) - 1 == $i) {
                         # code...

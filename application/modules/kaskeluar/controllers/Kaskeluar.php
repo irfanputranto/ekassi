@@ -39,6 +39,7 @@ class Kaskeluar extends BackendController
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+        BackendController::check_logged_in('login');
     }
 
     /**
@@ -69,8 +70,8 @@ class Kaskeluar extends BackendController
         /*
          * Data Site Datatables
          */
-        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime('-1 month')));
-        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') <=", date('Y-m-d'));
+        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') >=", date('Y-m-d'));
+        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') <=", date('Y-m-d', strtotime('+1 month')));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];
@@ -105,8 +106,8 @@ class Kaskeluar extends BackendController
         $table = 'tb_kas_keluar';
         $where = "WHERE to_char(tanggal_kk, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD')";
         $kd = $this->models->cKode($select, $table, $where, 'KK');
-        var_dump($kd);
-        die;
+        // var_dump($kd);
+        // die;
     }
 
     public function insert()
@@ -115,8 +116,6 @@ class Kaskeluar extends BackendController
         $kdakun   = htmlspecialchars($this->input->post('kdakun'));
         $jmlkk  = htmlspecialchars($this->input->post('jmlkk'));
         $ketkk  = htmlspecialchars($this->input->post('ketkk'));
-
-
 
         $this->form_validation->set_rules('kdakun', 'Kode Akun', 'required', [
             'required' => '%s Tidak Boleh Kosong'

@@ -39,6 +39,7 @@ class Kasmasuk extends BackendController
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+        BackendController::check_logged_in('login');
     }
 
     /**
@@ -72,8 +73,8 @@ class Kasmasuk extends BackendController
         /*
          * Data Site Datatables
          */
-        $this->db->where("to_char(tanggal_km, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime('-1 month')));
-        $this->db->where("to_char(tanggal_km, 'YYYY-MM-DD') <=", date('Y-m-d'));
+        $this->db->where("to_char(tanggal_km, 'YYYY-MM-DD') >=", date('Y-m-d'));
+        $this->db->where("to_char(tanggal_km, 'YYYY-MM-DD') <=", date('Y-m-d', strtotime('+1 month')));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];

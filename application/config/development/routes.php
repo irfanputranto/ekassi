@@ -49,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Backend';
+$route['default_controller'] = 'Auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -125,3 +125,17 @@ $route['ia/put'] = 'Iuran/update';
 $route['ia/hapus/(:any)'] = 'Iuran/destroy/$1';
 $route['ia/kodeakun'] = 'Iuran/kdakun';
 $route['ia/anggota'] = 'Iuran/kdiurananggota';
+
+// dashboard
+$route['home'] = 'Backend';
+
+//Login Link
+$route['login'] = 'Auth';
+$route['validasi/data'] = 'Auth/validate';
+$route['logout'] = 'Auth/keluar';
+
+
+//laporan iuran
+$route['laporaniuran']      = "Iuran/laporan";
+$route['laporandata']       = "Iuran/get_data_laporan";
+$route['cetakiuran']        = "Iuran/cetak";

@@ -27,7 +27,9 @@ class Iuran extends BackendController
 
     protected $data = array(
         'title' => 'E-kas | Iuran Anggota',
-        'subtitel' => 'Iuran Anggota'
+        'subtitel' => 'Iuran Anggota',
+        'laporantitle' => 'E-kas | Laporan Iuran Anggota',
+        'laporansubtitel' => 'Laporan Iuran Anggota',
     );
 
     /**
@@ -39,6 +41,7 @@ class Iuran extends BackendController
     {
         // To inherit directly the attributes of the parent class.
         parent::__construct();
+        BackendController::check_logged_in('login');
     }
 
     /**
@@ -69,8 +72,8 @@ class Iuran extends BackendController
         /*
          * Data Site Datatables
          */
-        $this->db->where("to_char(tanggal_iuran, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime('-1 month')));
-        $this->db->where("to_char(tanggal_iuran, 'YYYY-MM-DD') <=", date('Y-m-d'));
+        $this->db->where("to_char(tanggal_iuran, 'YYYY-MM-DD') >=", date('Y-m-d'));
+        $this->db->where("to_char(tanggal_iuran, 'YYYY-MM-DD') <=", date('Y-m-d', strtotime('+1 month')));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];
@@ -334,5 +337,110 @@ class Iuran extends BackendController
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($json));
+    }
+
+
+    public function laporan()
+    {
+        $this->render_page('Laporan', $this->data);
+    }
+
+    public function get_data_laporan()
+    {
+        $tanggalawal    = $this->input->post('inputstart');
+        $tanggalakhir   = $this->input->post('inputend');
+
+        $session = [
+            'tanggalawal'   => $tanggalawal,
+            'tanggalakhir'  => $tanggalakhir
+        ];
+        $this->session->set_userdata($session);
+
+        $table = 'tb_iuran';
+        $column_order = [null, 'tb_iuran.id_anggota', 'tanggal_iuran', 'keterangan', 'keterangan', 'tb_iuran.id_kode_akun', 'id_akun', 'tb_anggota.nama_anggota', 'tb_data_akun.nama_akun', 'tb_data_akun.nama_akun', 'tb_jabatan.nama_jabatan'];
+
+        $column_search = '';
+        $order = ['tb_iuran.id_iuran' => 'desc'];
+        $join = [
+            'tb_data_akun'  => 'tb_data_akun.id_kode_akun = tb_iuran.id_kode_akun',
+            'tb_anggota'    => 'tb_anggota.id_anggota = tb_iuran.id_anggota',
+            'tb_jabatan'    => 'tb_jabatan.id_jabatan = tb_anggota.id_jabatan'
+        ];
+
+        /*
+         * Data Site Datatables
+         */
+
+        if ($tanggalawal != null && $tanggalakhir != null) {
+
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-d-m", strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-d-m', strtotime($tanggalakhir))]);
+        }
+
+        $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
+        $data = [];
+        $no   = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = [];
+            $row[] = $no;
+            $row[] = date("d-m-Y H:i:s", strtotime($field['tanggal_iuran']));
+            $row[] = $field['kode_akun'];
+            $row[] = $field['nama_akun'];
+            $row[] = $field['nama_anggota'];
+            $row[] = $field['nama_jabatan'];
+            $row[] = $field['keterangan'];
+            $row[] = 'Rp. ' . number_format($field['uang_iuran'], 0, ',', '.');
+            $data[] = $row;
+        }
+
+        if ($tanggalawal != null && $tanggalakhir != null) {
+            # code...
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-d-m", strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-d-m', strtotime($tanggalakhir))]);
+        }
+        $recordsfiltered = $this->models->count_filtered(null, $table, $join, $column_order, $column_search, $order);
+
+        $json = [
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->models->count_all($table),
+            "recordsFiltered" => $recordsfiltered,
+            "data" => $data
+        ];
+
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
+    }
+
+    public function cetak()
+    {
+        $mpdf = new \Mpdf\Mpdf();
+
+        $tanggalawal = $this->session->userdata('tanggalawal');
+        $tanggalakhir = $this->session->userdata('tanggalakhir');
+
+        $this->db->select('*');
+        $this->db->join('tb_data_akun', 'tb_data_akun.id_kode_akun = tb_iuran.id_kode_akun');
+        $this->db->join('tb_anggota', 'tb_anggota.id_anggota = tb_iuran.id_anggota');
+        $this->db->join('tb_jabatan', 'tb_jabatan.id_jabatan = tb_anggota.id_jabatan');
+
+        if ($tanggalawal != null && $tanggalakhir != null) {
+            # code...
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-d-m", strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-d-m', strtotime($tanggalakhir))]);
+            $tanggal = 'Tanggal ' . date('m-d-Y', strtotime($tanggalawal)) . ' - ' . date('m-d-Y', strtotime($tanggalakhir));
+        } else {
+            # code...
+            $tanggal = '';
+        }
+
+        $data['laporandata'] = $this->db->get('tb_iuran')->result_array();
+        $data['tanggal'] = $tanggal;
+        $data['title']  = 'Laporan Iuran';
+        $download = 'Laporan_iuran.pdf';
+        $data = $this->load->view('Cetak', $data, TRUE);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output($download, 'I');
     }
 }
