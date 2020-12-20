@@ -316,7 +316,6 @@ $(document).on('ready', function () {
 
 $(document).ready(function() {
     $('.applyBtn').on('click',function() {
-     
       table.ajax.reload(function (json) {
         json.response;
       });

@@ -139,3 +139,19 @@ $route['logout'] = 'Auth/keluar';
 $route['laporaniuran']      = "Iuran/laporan";
 $route['laporandata']       = "Iuran/get_data_laporan";
 $route['cetakiuran']        = "Iuran/cetak";
+
+
+// laporan kaskeluar
+$route['laporankaskeluar']      = "kaskeluar/laporan";
+$route['laporandatakaskeluar']      = "Kaskeluar/get_data_laporan";
+$route['cetakkaskeluar']        = "Kaskeluar/cetak";
+
+// laporan kasmasuk
+$route['laporankasmasuk']      = "Kasmasuk/laporan";
+$route['laporandatakasmasuk']      = "Kasmasuk/get_data_laporan";
+$route['cetakkasmasuk']        = "Kasmasuk/cetak";
+
+//laporan jurnal
+$route['laporanjurnal']             = "Jurnal/laporan";
+$route['laporandatajurnal']         = "Jurnal/get_data_laporan";
+$route['cetakjurnal']               = "Jurnal/cetak";

@@ -372,9 +372,8 @@ class Iuran extends BackendController
          */
 
         if ($tanggalawal != null && $tanggalakhir != null) {
-
-            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-d-m", strtotime($tanggalawal))]);
-            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-d-m', strtotime($tanggalakhir))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date('Y-m-d', strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-m-d', strtotime($tanggalakhir))]);
         }
 
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
@@ -396,8 +395,8 @@ class Iuran extends BackendController
 
         if ($tanggalawal != null && $tanggalakhir != null) {
             # code...
-            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-d-m", strtotime($tanggalawal))]);
-            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-d-m', strtotime($tanggalakhir))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date('Y-m-d', strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date('Y-m-d', strtotime($tanggalakhir))]);
         }
         $recordsfiltered = $this->models->count_filtered(null, $table, $join, $column_order, $column_search, $order);
 
@@ -437,8 +436,8 @@ class Iuran extends BackendController
 
         $data['laporandata'] = $this->db->get('tb_iuran')->result_array();
         $data['tanggal'] = $tanggal;
-        $data['title']  = 'Laporan Iuran';
-        $download = 'Laporan_iuran.pdf';
+        $data['title']  = 'Laporan Kas Keluar';
+        $download = 'Laporan_KasKeluar.pdf';
         $data = $this->load->view('Cetak', $data, TRUE);
         $mpdf->WriteHTML($data);
         $mpdf->Output($download, 'I');

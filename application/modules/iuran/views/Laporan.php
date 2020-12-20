@@ -30,7 +30,7 @@
                                              <div class="controls">
                                                  <div class="input-prepend input-group">
                                                      <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-                                                     <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="<?= date('d-m-Y') ?>" />
+                                                     <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="<?= date('d-m-Y') . ' - ' . date('d-m-Y') ?>" />
                                                  </div>
                                              </div>
                                          </div>
@@ -46,7 +46,7 @@
                                      <fieldset>
                                          <div class="control-group">
                                              <div class="controls">
-                                                 <a href="<?= base_url('cetakiuran') ?>" class="btn btn-primary">Cetak</a>
+                                                 <a href="<?= base_url('cetakkaskeluar') ?>" class="btn btn-primary">Cetak</a>
                                              </div>
                                          </div>
                                      </fieldset>

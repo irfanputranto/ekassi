@@ -15,7 +15,7 @@
                             <img src="<?= base_url() . $this->session->userdata('image_akun') ?>" height="55px" width="55px" alt="foto" class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            <span>Selamat Datang,</span>
                             <h2><?= $this->session->userdata('nama_akun'); ?></h2>
                         </div>
                     </div>
@@ -62,9 +62,9 @@
                                 <li><a><i class="fa fa-file-pdf-o"></i> Laporan <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?= base_url('laporaniuran') ?>">Iuran Anggota</a></li>
-                                        <li><a href="#">Kas Keluar</a></li>
-                                        <li><a href="#">Kas Masuk</a></li>
-                                        <li><a href="#">Jurnal</a></li>
+                                        <li><a href="<?= base_url('laporankaskeluar'); ?>">Kas Keluar</a></li>
+                                        <li><a href="<?= base_url('laporankasmasuk'); ?>">Kas Masuk</a></li>
+                                        <li><a href="<?= base_url('laporanjurnal'); ?>">Jurnal</a></li>
                                     </ul>
                                 </li>
 

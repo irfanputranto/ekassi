@@ -27,7 +27,9 @@ class Kaskeluar extends BackendController
 
     protected $data = array(
         'title' => 'E-kas | Kas Keluar',
-        'subtitel' => 'Kas Keluar'
+        'subtitel' => 'Kas Keluar',
+        'laporantitle' => 'E-kas | Laporan Kas Keluar',
+        'laporansubtitel' => 'Laporan Kas Keluar',
     );
 
     /**
@@ -298,5 +300,106 @@ class Kaskeluar extends BackendController
         $this->output
             ->set_content_type('application/json')
             ->set_output(json_encode($json));
+    }
+
+
+    public function laporan()
+    {
+        $this->render_page('Laporan', $this->data);
+    }
+
+    public function get_data_laporan()
+    {
+        $tanggalawal    = $this->input->post('inputstart');
+        $tanggalakhir   = $this->input->post('inputend');
+
+        $session = [
+            'tanggalawal'   => $tanggalawal,
+            'tanggalakhir'  => $tanggalakhir
+        ];
+        $this->session->set_userdata($session);
+
+        $table = 'tb_kas_keluar';
+        $column_order = [null, 'tb_kas_keluar.tanggal_kk', 'tb_kas_keluar.ket_kk', 'tb_kas_keluar.id_kode_akun', 'tb_kas_keluar.jumlahkk', 'tb_kas_keluar.kdbuktikk'];
+        $column_search = ['tb_kas_keluar.tanggal_kk', 'tb_kas_keluar.ket_kk', 'tb_kas_keluar.id_kode_akun', 'tb_kas_keluar.jumlahkk', 'tb_kas_keluar.kdbuktikk'];
+        $order = ['tb_kas_keluar.id_kk' => 'desc'];
+        $join = [
+            'tb_data_akun' => 'tb_data_akun.id_kode_akun = tb_kas_keluar.id_kode_akun'
+        ];
+
+
+        /*
+         * Data Site Datatables
+         */
+
+        if ($tanggalawal != null && $tanggalakhir != null) {
+
+            $this->db->where(["to_char(tanggal_kk, 'YYYY-MM-DD') >=" => date("Y-m-d", strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_kk, 'YYYY-MM-DD') <=" => date("Y-m-d", strtotime($tanggalakhir))]);
+        }
+
+        $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
+
+        $data = [];
+        $no   = $_POST['start'];
+        foreach ($list as $field) {
+            $no++;
+            $row = [];
+            $row[] = $no;
+            $row[] = date("d-m-Y H:i:s", strtotime($field['tanggal_kk']));
+            $row[] = $field['kdbuktikk'];
+            $row[] = $field['kode_akun'];
+            $row[] = $field['nama_akun'];
+            $row[] = $field['ket_kk'];
+            $row[] = 'Rp. ' . number_format($field['jumlahkk'], 0, ',', '.');
+            $data[] = $row;
+        }
+
+        if ($tanggalawal != null && $tanggalakhir != null) {
+            # code...
+            $this->db->where(["to_char(tanggal_kk, 'YYYY-MM-DD') >=" => date("Y-m-d", strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_kk, 'YYYY-MM-DD') <=" => date("Y-m-d", strtotime($tanggalakhir))]);
+        }
+        $recordsFiltered = $this->models->count_filtered(null, $table, $join, $column_order, $column_search, $order);
+
+        $json = [
+            "draw" => $_POST['draw'],
+            "recordsTotal" => $this->models->count_all($table),
+            "recordsFiltered" => $recordsFiltered,
+            "data" => $data
+        ];
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($json));
+    }
+
+    public function cetak()
+    {
+        $mpdf = new \Mpdf\Mpdf();
+
+        $tanggalawal = $this->session->userdata('tanggalawal');
+        $tanggalakhir = $this->session->userdata('tanggalakhir');
+
+        $this->db->select('*');
+        $this->db->join('tb_data_akun', 'tb_data_akun.id_kode_akun = tb_kas_keluar.id_kode_akun');
+
+        if ($tanggalawal != null && $tanggalakhir != null) {
+            # code...
+            $this->db->where(["to_char(tanggal_kk, 'YYYY-MM-DD') >=" => date("Y-m-d", strtotime($tanggalawal))]);
+            $this->db->where(["to_char(tanggal_kk, 'YYYY-MM-DD') <=" => date("Y-m-d", strtotime($tanggalakhir))]);
+
+            $tanggal = 'Tanggal ' . date('m-d-Y', strtotime($tanggalawal)) . ' - ' . date('m-d-Y', strtotime($tanggalakhir));
+        } else {
+            # code...
+            $tanggal = '';
+        }
+        $this->db->order_by('id_kk', 'DESC');
+        $data['laporandata'] = $this->db->get('tb_kas_keluar')->result_array();
+        $data['tanggal'] = $tanggal;
+        $data['title']  = 'Laporan Kas keluar';
+        $download = 'Laporan_kaskeluar.pdf';
+        $data = $this->load->view('Cetak', $data, TRUE);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output($download, 'I');
     }
 }
