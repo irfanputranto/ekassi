@@ -71,8 +71,8 @@ class Jurnal extends BackendController
         /*
          * Data Site Datatables
          */
-        $this->db->where("to_char(tanggal_jurnal, 'YYYY-MM-DD') >=", date('Y-m-d'));
-        $this->db->where("to_char(tanggal_jurnal, 'YYYY-MM-DD') <=", date('Y-m-d', strtotime('+1 month')));
+        $this->db->where("to_char(tanggal_jurnal, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime("-1 month")));
+        $this->db->where("to_char(tanggal_jurnal, 'YYYY-MM-DD') <=", date('Y-m-d'));
         $this->db->like("kodebukti_jurnal", "JU");
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];

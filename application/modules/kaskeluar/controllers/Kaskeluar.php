@@ -72,8 +72,8 @@ class Kaskeluar extends BackendController
         /*
          * Data Site Datatables
          */
-        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') >=", date('Y-m-d'));
-        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') <=", date('Y-m-d', strtotime('+1 month')));
+        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') >=", date('Y-m-d', strtotime("-1 month")));
+        $this->db->where("to_char(tanggal_kk, 'YYYY-MM-DD') <=", date('Y-m-d'));
         $list = $this->models->get_datatables(null, $table, $join, $column_order, $column_search, $order)->result_array();
         $data = [];
         $no   = $_POST['start'];

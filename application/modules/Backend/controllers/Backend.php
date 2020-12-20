@@ -58,22 +58,22 @@ class Backend extends BackendController
     {
         $selectiu = 'sum(tb_iuran.uang_iuran) AS iuranrp';
         $whereiu  = [
-            "to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-m-d"),
-            "to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date("Y-m-d", strtotime("+1 month"))
+            "to_char(tanggal_iuran, 'YYYY-MM-DD') >=" => date("Y-m-d", strtotime("-1 month")),
+            "to_char(tanggal_iuran, 'YYYY-MM-DD') <=" => date("Y-m-d")
         ];
         $iuran = $this->models->get_data($selectiu, 'tb_iuran', $whereiu)->row_array();
 
         $selectkm = 'sum(tb_kas_masuk.jumlahkm) AS uangmasuk';
         $wherekm = [
-            "to_char(tanggal_km, 'YYYY-MM-DD') >=" => date("Y-m-d"),
-            "to_char(tanggal_km, 'YYYY-MM-DD') <=" => date("Y-m-d", strtotime("+1 month"))
+            "to_char(tanggal_km, 'YYYY-MM-DD') >=" => date("Y-m-d", strtotime("-1 month")),
+            "to_char(tanggal_km, 'YYYY-MM-DD') <=" => date("Y-m-d")
         ];
         $kasmasuk = $this->models->get_data($selectkm, 'tb_kas_masuk', $wherekm)->row_array();
 
         $selectkk  = 'sum(tb_kas_keluar.jumlahkk) AS uangkeluar';
         $wherekk   = [
-            "to_char(tanggal_kk, 'YYYY-MM-DD') >=" => date("Y-m-d"),
-            "to_char(tanggal_kk, 'YYYY-MM-DD') <=" => date("Y-m-d", strtotime("+1 month"))
+            "to_char(tanggal_kk, 'YYYY-MM-DD') >=" => date("Y-m-d", strtotime("-1 month")),
+            "to_char(tanggal_kk, 'YYYY-MM-DD') <=" => date("Y-m-d")
         ];
         $kaskeluar = $this->models->get_data($selectkk, 'tb_kas_keluar', $wherekk)->row_array();
         $html = '';
